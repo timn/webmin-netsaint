@@ -139,6 +139,11 @@ if ($in{'notunreachable'} !~ /^[01]$/) {
 $cfile=&read_file_lines($config{'host_config'});
 $cgifile=&read_file_lines($config{'cgi_config'});
 
+local $ph = $in{'parenthost'} ? $in{'parenthost'} : "";
+local $hcc = $in{'checkcommand'} ? $in{'checkcommand'} : "";
+local $eh = $in{'eventhandler'} ? $in{'eventhandler'} : "";
+local $tp = $in{'notperiod'} ? $in{'notperiod'} : "";
+
 
 if ($host) {
 
@@ -154,9 +159,6 @@ if ($host) {
    }
  } else {
    # the host exists, we change it
-   local $ph = $in{'parenthost'} ? $in{'parenthost'} : "";
-   local $hcc = $in{'checkcommand'} ? $in{'checkcommand'} : "";
-   local $eh = $in{'eventhandler'} ? $in{'eventhandler'} : "";
 
    $cfile->[$host->{'line'}]=join('=',
                                   "host[$host->{'value'}]",
@@ -167,7 +169,7 @@ if ($host) {
                                        $hcc,
                                        $in{'maxattempts'},
                                        $in{'notinterval'},
-                                       $in{'notperiod'},
+                                       $tp,
                                        $in{'notrecovery'},
                                        $in{'notdown'},
                                        $in{'notunreachable'},
@@ -188,7 +190,7 @@ if ($host) {
                            $hcc,
                            $in{'maxattempts'},
                            $in{'notinterval'},
-                           $in{'notperiod'},
+                           $tp,
                            $in{'notrecovery'},
                            $in{'notdown'},
                            $in{'notunreachable'},

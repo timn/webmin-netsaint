@@ -2,4 +2,4 @@ name=netsaint
 desc=NetSaint Configuration
 desc_de=NetSaint Konfiguration
 category=net
-os_support=solaris redhat-linux debian-linux slackware-linux suse-linux aix hpux freebsd osf1 irix
+os_support=solaris redhat-linux debian-linux slackware-linux suse-linux aix hpux freebsd osf1 irix turbo-linux

@@ -140,20 +140,23 @@ if (!$foundhosteh && $in{'globhosteh'}) {
 }
 
 $tmp=&find_name('global_host_event_handler', \@conf);
-if ($tmp) {
- $cfile->[$tmp->{'line'}]=join('=', "global_host_event_handler", $in{'globhosteh'});
-} else {
- push(@{$cfile}, join('=', "global_host_event_handler", $in{'globhosteh'}));
+if ($in{'globhosteh'}) {
+  if ($tmp) {
+   $cfile->[$tmp->{'line'}]=join('=', "global_host_event_handler", $in{'globhosteh'});
+  } else {
+   push(@{$cfile}, join('=', "global_host_event_handler", $in{'globhosteh'}));
+  }
 }
 
 
 $tmp=&find_name('global_service_event_handler', \@conf);
-if ($tmp) {
- $cfile->[$tmp->{'line'}]=join('=', "global_service_event_handler", $in{'globserveh'});
-} else {
- push(@{$cfile}, join('=', "global_service_event_handler", $in{'globserveh'}));
+if ($in{'globserveh'}) {
+  if ($tmp) {
+   $cfile->[$tmp->{'line'}]=join('=', "global_service_event_handler", $in{'globserveh'});
+  } else {
+   push(@{$cfile}, join('=', "global_service_event_handler", $in{'globserveh'}));
+  }
 }
-
 
 
 &flush_file_lines();

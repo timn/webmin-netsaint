@@ -367,6 +367,7 @@ scgi_inv_dir=Directory '$1' (for setting $2) is missing or does not exist
 scgi_invalid=The value $1 for $2 is invalid (must $3)
 scgi_nomainfile=No file given for main configuration file
 scgi_0or1=0 or 1
+scgi_procchkcomm=process check command
 scgi_suppalwin=suppressig alert window
 scgi_number=number
 scgi_table_fg_color=table foreground color

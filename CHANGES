@@ -1,0 +1,38 @@
+ NetSaint Configuration Webmin Module
+ Copyright (C) 1999-2000 by Tim Niemueller, Stephen Nodvin, TeleVideo Global, Inc.
+ Written by Tim Niemueller <tim@niemueller.de> - http://www.niemueller.de
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+
+ Created  : 20.12.1999
+
+
+
+ Changes
+ =========================================================================================
+
+ UNKNOWN     - Many undocumented changes, beginning of this CHANGES file on 29.06.2000
+ 29.06.2000  - CHANGES File created
+ (0.80.1)    - Smaller fixes (in some places it saved 0 instead of Nothing ("").
+ (0.0.5)     - Setup mailinglist
+             - Added Turbo Linux to the list of supported OS
+             - Security Bug solved: Till this version you had to define a default user
+               in CGI authentication
+
+ =========================================================================================
+
+ Send any questions, comments, bug reports etc. to
+ Tim Niemueller <tim@niemueller.de>
+ 
+ The homepage for this module is http://www.niemueller.de/webmin/modules/netsaint/
+ This module is part of the LinuxMonitor project. You find it's website at
+ http://www.niemueller.de/projects/linuxmonitor/

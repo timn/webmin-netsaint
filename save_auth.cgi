@@ -35,7 +35,6 @@ if ($tmp) {
  push(@{$cfile}, join('=', "use_authentication", $in{'useauth'}));
 }
 
-if (! $in{'defaultuser'}) { &error(&text('sauth_invalid', $in{'defaultuser'}, $text{'sauth_defaultuser'}, $text{'sauth_present'})) }
 $tmp=&find_name('default_user_name', \@conf);
 if ($tmp) {
  $cfile->[$tmp->{'line'}]=join('=', "default_user_name", $in{'defaultuser'});

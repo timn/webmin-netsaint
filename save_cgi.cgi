@@ -51,6 +51,13 @@ if ($tmp) {
  push(@{$cfile}, join('=', "url_html_path", $in{'urlhtmlpath'}));
 }
 
+if (!$in{'processcheckcommand'}) { &error(&text('scgi_inv_dir', $in{'processcheckcommand'}, $text{'scgi_procchkcomm'})) }
+$tmp=&find_name('process_check_command', \@conf);
+if ($tmp) {
+ $cfile->[$tmp->{'line'}]=join('=', "process_check_command", $in{'processcheckcommand'});
+} else {
+ push(@{$cfile}, join('=', "process_check_command", $in{'processcheckcommand'}));
+}
 
 if (!$in{'urlcgibinpath'}) { &error(&text('scgi_inv_dir', $in{'urlcgibinpath'}, "URL CGI path")) }
 $tmp=&find_name('url_cgibin_path', \@conf);

@@ -1,6 +1,6 @@
 
 #    NetSaint Configuration Webmin Module
-#    Copyright (C) 1999-2000 by Tim Niemueller, Stephen Nodvin, LinuxTel Associates
+#    Copyright (C) 1999-2000 by Tim Niemueller, Stephen Nodvin, TeleVideo Global, Inc.
 #    Written by Tim Niemueller <tim@niemueller.de> - http://www.niemueller.de
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -87,5 +87,5 @@ sub find_struct {
 return @rv;
 }
 
-$version="0.79.1";
+$version="0.80.1-0.0.5";
 ### END.
