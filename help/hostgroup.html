@@ -1,0 +1,67 @@
+<header>Introduction to NetSaint Configuration</header>
+
+<H3>Hostgroup Configuration</H3>
+
+<p>
+<a name="hostgroup"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Host Group Definition</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td><td><strong>hostgroup[&lt;group_name&gt;]=&lt;group_alias&gt;;&lt;contact_groups&gt;;&lt;hosts&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>hostgroup[nt-servers]=All NT Servers;nt-admins;rosie,dev,liatris</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+A host group definition is used to group one or more hosts together for the purposes of simplifying notifications.
+Each host that you define must be a member of at least one host group - even if it is the only host in that group.
+Hosts can be in more than one host group.  When a host goes down, becomes unreachable, or recovers, NetSaint will find which
+host group(s) the host is a member of, get the <a href="#contactgroup">contact group</a> for each of those hostgroups, and notify all <a href="#contact">contacts</a> associated with those contact groups.  This may sound complex, but for most people it doesn't have to be.  It does,  however, allow for flexibility in determining who gets paged for what kind of problems.  The different arguments to
+a host group definition are outlined below.
+</p>
+
+<p>
+<table border="1">
+<tr>
+<td valign="top"><strong>&lt;group_name&gt;</strong></td>
+<td>
+This is a short name used to identify the host group.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;group_alias&gt;</strong></td>
+<td>
+This is a longer name or description used to identify the host group.  It is provided in order to allow you to more
+easily identify a particular host group.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;contact_groups&gt;</strong></td>
+<td>
+This is a list of the <i>short names</i> of the <a href="#contactgroup">contact groups</a> that should be notified whenever
+there are problems (or recoveries) with any of the hosts in this host group.  Multiple contact groups should be separated by commas.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;hosts&gt;</strong></td>
+<td>
+This is a list of the <i>short names</i> of <a href="#host">hosts</a> that should be included in this group.   Multiple host names should be separated by commas.
+</td>
+</tr>
+</table>
+</p>
+
+
+<hr>
+

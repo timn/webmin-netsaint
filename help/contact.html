@@ -1,0 +1,136 @@
+<header>Introduction to NetSaint Configuration</header>
+
+<H3>Contact Configuration</H3>
+
+<p>
+<a name="contact"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Contact Definition</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td><td><strong>contact[&lt;contact_name&gt;]=&lt;contact_alias&gt;;&lt;svc_notification_period&gt;;&lt;host_notification_period&gt;;&lt;svc_notify_recovery&gt;;&lt;svc_notify_critical&gt;;&lt;svc_notify_warning&gt;;lt;host_notify_recovery&gt;;&lt;host_notify_down&gt;;&lt;host_notify_unreachable&gt;;&lt;service_notify_commands&gt;;&lt;host_notify_commands&gt;;&lt;email_address&gt;;&lt;pager&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>contact[egalstad]=Ethan Galstad;24x7;24x7;1;1;1;1;1;1;notify-by-email,notify-by-epager;host-notify-by-epager;egalstad@nospam.extension.umn.edu;pagegalstad@pagenet.com</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+A contact definition is used to identify someone who should be contacted in the event of a problem on your network.
+The different arguments to a contact definition are described below.
+</p>
+
+<p>
+<table border="1">
+<tr>
+<td valign="top"><strong>&lt;contact_name&gt;</strong></td>
+<td>
+This is the short name used to identify the contact.  It is referenced in <a href="#contactgroup">contact group</a> 
+definitions.  Under the right circumstances, the $CONTACTNAME$ <a href="macros.html">macro</a> will contain this
+value.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;contact_alias&gt;</strong></td>
+<td>
+This is a longer name or description for the contact.  Under the rights circumstances, the $CONTACTALIAS$ 
+<a href="macros.html">macro</a> will contain this value.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;svc_notification_period&gt;</strong></td>
+<td>
+This is the short name of the <a href="#timeperiod">time period</a> during which the contact can be notified about service problems or recoveries.  You can think of this as an "on call" time for service notifications for the contact.  Read the "Time Periods" document in the <a href="theory.html">theory of operation</a> section of the documentation for more information on how this works and potential problems that may result from improper use.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;host_notification_period&gt;</strong></td>
+<td>
+This is the short name of the <a href="#timeperiod">time period</a> during which the contact can be notified about host problems or recoveries.  You can think of this as an "on call" time for host notifications for the contact.  Read the "Time Periods" document in the <a href="theory.html">theory of operation</a> section of the documentation for more information on how this works and potential problems that may result from improper use.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;svc_notify_recovery&gt;</strong></td>
+<td>
+This value determines whether or not the contact will be notified of service recoveries.  Set this value to
+<b>1</b> if the contact should be notified, <b>0</b> if they shouldn't.  Note: If a <a href="#service">service</a> is configured to not send out notifications upon recovery, contacts will not be notified about recoveries for that service, regardless of this setting.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;svc_notify_critical&gt;</strong></td>
+<td>
+This value determines whether or not the contact will be notified if a service is in a <a href="statuslevels.html">critical</a> state.  Set this value to <b>1</b> if the contact should be notified of critical states, <b>0</b> if they shouldn't.
+Note: If a <a href="#service">service</a> is configured to not send out notifications for critical states, contacts will not be notified about critical states for that service, regardless of this setting.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;svc_notify_warning&gt;</strong></td>
+<td>
+This value determines whether or not the contact will be notified if a service is in either a <a href="statuslevels.html">warning</a> or an <a href="statuslevels.html">unknown</a> state.  Set this value to <b>1</b> if the contact should be notified of warning/unknown states, <b>0</b> if they shouldn't. Note: If a <a href="#service">service</a> is configured to not send out notifications for warning/unknown states, contacts will not be notified about warning/unknown states for that service, regardless of this setting.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;host_notify_recovery&gt;</strong></td>
+<td>
+This value determines whether or not the contact will be notified if any host <a href="statuslevels.html">recovers</a>.  Set this value to <b>1</b> if the contact should be notified of hosts that recover, <b>0</b> if they shouldn't. Note: If a <a href="#host">host</a> is configured to not send out notifications for recoveries, contacts will not be notified when the host recovers, regardless of this setting.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;host_notify_down&gt;</strong></td>
+<td>
+This value determines whether or not the contact will be notified if any host goes <a href="statuslevels.html">down</a>.  Set this value to <b>1</b> if the contact should be notified of hosts that go down, <b>0</b> if they shouldn't. Note: If a <a href="#host">host</a> is configured to not send out notifications for down states, contacts will not be notified when the host goes down, regardless of this setting.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;host_notify_unreachable&gt;</strong></td>
+<td>
+This value determines whether or not the contact will be notified if any host becomes <a href="statuslevels.html">unreachable</a>.  Set this value to <b>1</b> if the contact should be notified of hosts that become unreachable, <b>0</b> if they shouldn't. Note: If a <a href="#host">host</a> is configured to not send out notifications for unreachable states, contacts will not be notified when the host becomes unreachable, regardless of this setting.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;service_notify_commands&gt;</strong></td>
+<td>
+This is a list of the <i>short names</i> of the <a href="#command">commands</a> used to notify the contact
+of a <i>service</i> problem or recovery.  Multiple notification commands should be separated by commas.  All
+notification commands are executed when the contact needs to be notified.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;host_notify_commands&gt;</strong></td>
+<td>
+This is a list of the <i>short names</i> of the <a href="#command">commands</a> used to notify the contact
+of a <i>host</i> problem or recovery.  Multiple notification commands should be separated by commas.  All
+notification commands are executed when the contact needs to be notified.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;email_address&gt;</strong></td>
+<td>
+This is the email address for the contact.  Depending on how you configure your notification commands, it
+can be used to send out an alert email to the contact.  Under the right circumstances, the $CONTACTEMAIL$
+<a href="macros.html">macro</a> will contain this value.
+fs</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;pager&gt;</strong></td>
+<td>
+This is the pager number for the contact.  It can also be an email address to a pager gateway 
+(i.e. pagejoe@pagenet.com).  Depending on how you configure your notification commands, it
+can be used to send out an alert page to the contact.  Under the right circumstances, the $CONTACTPAGER$
+<a href="macros.html">macro</a> will contact this value.
+</td>
+</tr>
+</table>
+</p>
+
+
+<hr>
+

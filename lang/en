@@ -1,0 +1,337 @@
+index_title=NetSaint Configuration
+index_error=Failed to load NetSaint Configuration module
+index_merr=Main Configuration file '$1' not found. Check <A HREF=$2>module configuration</A>.
+index_herr=Hosts Configuration file '$1' not found. Check <A HREF=$2>module configuration</A>.
+index_cerr=Configuration file '$1' not found. Check <A HREF=$2>module configuration</A>.
+
+seconds=seconds
+name=Name
+
+efiles_title=Files
+efiles_notallowed=You are not allowed to edit the file settings
+efiles_error=Failed to open files page
+efiles_header=File Options
+efiles_log=Full p ath to log file
+efiles_hostcfg=Full path to host configuration file (same as in module configuration!)
+efiles_status=Full path to status file
+efiles_temp=Full path to temp file
+efiles_return=NetSaint configuration
+
+ntfcs_title=Notifications
+ntfcs_notallowed=You are not allowed to edit the notification settings
+ntfcs_header=Notifications
+ntfcs_error=Failed to open notifications page
+ntfcs_summary=Generic Summary
+ntfcs_pager=Admin Pager Number or email-to-pager gateway
+ntfcs_email=Admin email
+ntfcs_return=NetSaint configuration
+
+log_title=Logging
+log_notallowed=You are not allowed to edit the logging settings
+log_header=Logging Options
+log_error=Failed to open logging page
+log_use_syslog=Use Syslog facility?
+log_syslog_level=Syslog Level
+log_notifications=Log Notifications?
+log_service_retries=Log service check retries?
+log_host_retries=Log host check retries?
+log_event_handler=Log host and service event handlers?
+log_return=NetSaint configuration
+
+misc_title=Miscellaneous
+misc_notallowed=You are not allowed to edit the miscellaneous settings
+misc_header=Miscellaneous Options
+misc_error=Failed to open miscellanous options page
+misc_sleep_time=Time to sleep between service checks
+misc_interval_length=Timing interval length
+misc_aggressive=Aggressive Host Checking?
+misc_return=NetSaint configuration
+
+html_title=HTML Options
+html_notallowed=You are not allowed to edit the HTML settings
+html_header=HTML Options
+html_error=Failed to open HTML options page
+html_autohtml=Generate static pages automatically?
+html_physical_html_path=Physical (local) path to html dir
+html_url_html_path=URL to HTML path
+html_url_cgibin_path=URL to CGI-BIN
+html_return=NetSaint configuration
+
+cgi_title=CGI Options
+cgi_notallowed=You are not allowed to edit the CGI settings
+cgi_header=CGI Options
+cgi_error=Failed to open CGI Options page
+cgi_main_config_file=Full path to main configuration file
+cgi_return=NetSaint configuration
+
+hosts_title=Hosts
+hosts_error=Failed to open hosts page
+hosts_hosts=Hosts
+hosts_hostgroups=Host Groups
+hosts_new_host=Define a new host
+hosts_new_hostgroup=Define a new hostgroup
+hosts_return=NetSaint configuration
+
+host_title_edit=Edit Host
+host_title_create=Create Host
+host_error=Failed to open host page
+host_header=Edit host $1
+host_alias=Host alias
+host_address=Host IP or FQDN
+host_parent=Parent host
+host_notification=Notification
+host_not_period=Period
+host_not_none=None
+host_not_interval=Interval
+host_not_recovery=Notify recovery
+host_not_down=Notify down
+host_not_unreachable=Notify unreachable
+host_check_command=Command to check host
+host_check_command_none=None
+host_max_attempts=Max attempts
+host_eventhandler=Event handler
+host_eventhandler_none=None
+host_none=None
+host_groups=Host is member of hostgroup(s)
+host_delete=Delete Host
+host_create=Create Host
+host_notfound=Host '$1' not found in host configuration file
+host_services=Services
+host_no_services=No services found!
+host_new_service=Define a new service
+host_return=hosts
+
+hostgroup_title_edit=Edit Hostgroup
+hostgroup_title_create=Create Hostgroup
+hostgroup_error=Failed to open hostgroup page
+hostgroup_header=Edit hostgroup $1
+hostgroup_alias=Hostgroup alias
+hostgroup_members=Members of this group
+hostgroup_contactgroups=Contact groups
+hostgroup_delete=Delete Hostgroup
+hostgroup_create=Create Hostgroup
+hostgroup_return=hosts
+
+contacts_title=Contacts
+contacts_error=Failed to open contacts page
+contacts_contacts=Contacts
+contacts_contactgroups=Contact Groups
+contacts_new_contact=Define a new Contact
+contacts_new_contactgroup=Define a new Contactgroup
+contacts_return=NetSaint configuration
+
+contact_title_edit=Edit Contact
+contact_title_create=Create Contact
+contact_error=Failed to open contact page
+contact_header=Edit contact $1
+contact_alias=Alias
+contact_email=email Address
+contact_pager=Pager Number/Address
+contact_notifications=Notify on...
+contact_serv_comm=Service command(s)
+contact_host_comm=Host command(s)
+contact_serv_rec=Service Recovery
+contact_serv_crit=Service Critical
+contact_serv_warn=Service Warning
+contact_host_rec=Host Recovery
+contact_host_down=Host down
+contact_host_unre=Host unreachable
+contact_not_none=None
+contact_svc_period=Service Period
+contact_host_period=Host Period
+contact_delete=Delete Contact
+contact_create=Create Contact
+contact_return=contacts
+
+contactgroup_title_edit=Edit Contactgroup
+contactgroup_title_create=Create Contactgroup
+contactgroup_error=Failed to open contactgroup page
+contactgroup_header=Edit contactgroup $1
+contactgroup_alias=Alias
+contactgroup_members=Members of this group
+contactgroup_delete=Delete Contactgroup
+contactgroup_create=Create Contactgroup
+contactgroup_return=contacts
+
+commands_title=Commands
+commands_error=Failed to open commands page
+commands_header=Commands
+commands_new=Define new command
+commands_return=NetSaint configuration
+
+command_title_edit=Edit Command
+command_title_create=Create Command
+command_error=Failed to open command page
+command_header=Edit command $1
+command_command=Command
+command_delete=Delete Command
+command_create=Create Command
+command_return=commands
+
+service_title_edit=Edit Service
+service_title_create=Create Service
+service_error=Failed to open service page
+service_header=Edit service $1 for host $2
+service_description=Service Description
+service_notification=Notification
+service_not_period=Period
+service_not_none=None
+service_not_interval=Interval
+service_not_recovery=Notify recovery
+service_not_crit=Notify critical
+service_not_warn=Notify warning
+service_check_period=Period for checking service
+service_check_period_none=None
+service_check_interval=Check interval
+service_retry_interval=Retry interval
+service_check_command=Command to check service
+service_check_command_none=None
+service_max_attempts=Max attempts
+service_eventhandler=Event handler
+service_eventhandler_none=None
+service_contactgroups=Contactgroups
+service_command=Check Command
+service_vanilla_command=Use "Vanilla" (on Commands page defined) command
+service_vanilla_arguments=with arguments
+service_vanilla_args_cmnt=(One Argument per line)
+service_raw_command=Use this raw command line
+service_delete=Delete Service
+service_create=Create Service
+service_return=edit host $1
+
+timeperiods_title=Timeperiods
+timeperiods_error=Failed to open timeperiods page
+timeperiods_timeperiods=Timeperiods
+timeperiods_new=Define a new Timeperiod
+timeperiods_return=NetSaint configuration
+
+timeperiod_title_edit=Edit Timeperiod
+timeperiod_title_create=Create Timeperiod
+timeperiod_error=Failed to open timeperiod page
+timeperiod_header=Edit timeperiod $1
+timeperiod_alias=Alias
+timeperiod_sunday=Sunday
+timeperiod_monday=Monday
+timeperiod_tuesday=Tuesday
+timeperiod_wednesday=Wednesday
+timeperiod_thursday=Thursday
+timeperiod_friday=Friday
+timeperiod_saturday=Saturday
+timeperiod_one_per_line=(One period per line)
+timeperiod_delete=Delete Timeperiod
+timeperiod_create=Create Timeperiod
+timeperiod_return=timeperiods
+timeperiod_desc=Enter one period per line with the format hh:mm-HH:MM (where hh:mm is the<BR> beginning and HH:MM is the end of the period). All periods together are the<BR> timeperiod.
+
+sfiles_error=Failed to save file options
+sfiles_nofile=No $1 file given
+sfiles_notfound=File '$1' could not be found
+
+slogging_error=Failed to save logging options
+slogging_invalid=Invalid value '$1' for $2 (must be $3)
+
+smisc_error=Failed to save miscellaneous options
+smisc_invalid=Invalid or missing value $1 for $2 (must be $3)
+
+shtml_error=Failed to save HTML options
+shtml_invalid=Invalid value $1 for $2 (must be $3)
+shtml_inv_dir=Directory '$1' (for setting $2) is missing or does not exist
+
+sntfcs_error=Failed to save notification options
+sntfcs_missing=Missing value for $1
+
+shost_error=Failed to save host
+shost_already_exists=A host named '$1' already exists. Choose another name
+shost_noalias=No alias given. You should give an alias for this host
+shost_noaddress=No address given. You must give an IP or FQDN
+shost_nogroup=No group given for host. You must give at least one group
+shost_maxattempts_err=Missing or invalid value for max attempts
+shtml_invalid=Invalid value $1 for $2 (must be $3)
+shost_interval_err=Missing or invalid value for notification interval
+shost_notperiod_err=You entered a notification period which does not exist
+shost_checkcommand_err=You entered a check command which does not exist
+shost_eventhandler_err=You entered an eventhandler which does not exist
+shost_parent_err=You entered a parent which does not exist
+shost_notfound=Host $1 could not been found, so it cannot be removed
+shost_notallowed_edit=You are not allowed to edit hosts
+shost_notallowed_create=You are not allowed to create hosts
+shost_notallowed_delete=You are not allowed to delete hosts
+
+shostgroup_error=Failed to save hostgroup
+shostgroup_already_exists=A hostgroup named '$1' already exists. Choose another name
+shostgroup_noalias=No alias given. You should give an alias for this hostgroup
+shostgroup_cannotremove=You cannot remove the host '$1' from this hostgroup because this is the only group for this host
+shostgroup_notfound=Hostgroup $1 could not been found, so it cannot be removed
+_notallowed_edit=You are not allowed to edit
+_notallowed_create=You are not allowed to create
+_notallowed_delete=You are not allowed to delete
+
+scontact_error=Failed to save contact
+scontact_missing=The value for $1 is missing
+scontact_invalid=The value $1 for $2 is invalid (must be 0 or 1)
+scontact_notfound=The contact $1 could not been found
+_notallowed_edit=You are not allowed to edit
+_notallowed_create=You are not allowed to create
+_notallowed_delete=You are not allowed to delete
+
+scontactgroup_error=Failed to save contactgroup
+scontactgroup_already_exists=A contactgroup named '$1' already exists. Choose another name
+scontactgroup_noalias=No alias given. You should give an alias for this contactgroup
+scontactgroup_cannotremove=You cannot remove the contact '$1' from this contactgroup because this is the only group for this contact
+scontactgroup_notfound=The contactgroup $1 could not been found
+scontactgroup_notallowed_edit=You are not allowed to edit contactgroups
+scontactgroup_notallowed_create=You are not allowed to create contactgroups
+scontactgroup_notallowed_delete=You are not allowed to delete contactgroups
+
+scommand_error=Failed to save command
+scommand_notfound=The command $1 could not been found
+scommand_already_exists=A command named '$1' already exists. Choose another name
+scommand_notallowed_edit=You are not allowed to edit commands
+scommand_notallowed_create=You are not allowed to create commands
+scommand_notallowed_delete=You are not allowed to delete commands
+
+stimeperiod_error=Failed to save time period
+stimeperiod_missing=You must give a timeperiod alias
+stimeperiod_already_exists=A timeperiod named '$1' already exists. Choose another name
+stimeperiod_invalid=The timeperiod '$1' is invalid. Must be of the format hh:mm-HH:MM
+stimeperiod_notallowed_edit=You are not allowed to edit timeperiods
+stimeperiod_notallowed_create=You are not allowed to create timeperiods
+stimeperiod_notallowed_delete=You are not allowed to delete timeperiods
+
+sservice_error=Failed to save service
+sservice_nodesc=You must enter a name for the service
+sservice_already_exists=A service named '$1' already exists. Choose another name
+sservice_miss_inv=Missing or invalid value $1 for $2
+sservice_vanilla=You choose Vanilla command but you didn't give one
+sservice_rawcommand=You choose raw command but you didn't give one
+sservice_notallowed_edit=You are not allowed to edit services
+sservice_notallowed_create=You are not allowed to create services
+sservice_notallowed_delete=You are not allowed to delete services
+
+acl_files=Can modify file settings
+acl_html=Can modify HTML settings
+acl_cgi=Can modify CGI settings
+acl_misc=Can modify miscellaneous settings
+acl_not=Can modify notification settings
+acl_logging=Can modify logging settings
+acl_host_edit=Can edit hosts
+acl_host_create=Can create hosts
+acl_host_delete=Can delete hosts
+acl_hostgroup_edit=Can edit hostgroups
+acl_hostgroup_create=Can create hostgroups
+acl_hostgroup_delete=Can delete hostgroups
+acl_contact_edit=Can edit contacts
+acl_contact_create=Can create contacts
+acl_contact_delete=Can delete contacts
+acl_contactgroup_edit=Can edit contacgroups
+acl_contactgroup_create=Can create contactgroups
+acl_contactgroup_delete=Can delete contactgroups
+acl_command_edit=Can edit commands
+acl_command_create=Can create commands
+acl_command_delete=Can delete commands
+acl_timeperiod_edit=Can edit timeperiods
+acl_timeperiod_create=Can create timeperiods
+acl_timeperiod_delete=Can delete timeperiods
+acl_service_edit=Can edit services
+acl_service_create=Can create services
+acl_service_delete=Can delete services

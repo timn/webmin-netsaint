@@ -1,0 +1,58 @@
+<header>Introduction to NetSaint Configuration</header>
+
+<H3>Command Configuration</H3>
+
+<p>
+<a name="command"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Command Definition</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td><td><strong>command[&lt;command_name&gt;]=&lt;command_line&gt;</strong></td>
+</tr>
+<tr>
+<td nowrap>Example 1:</td>
+<td><font color="red"><strong>command[check-host-alive]=/usr/local/netsaint/libexec/check_ping $HOSTADDRESS$ 100 100 1000.0 1000.0</strong></font></td>
+</tr>
+<tr>
+<td nowrap>Example 2:</td>
+<td><font color="red"><strong>command[check_pop]=/usr/local/netsaint/libexec/check_pop $HOSTADDRESS$</strong></font></td>
+</tr>
+<tr>
+<td nowrap>Example 3:</td>
+<td><font color="red"><strong>command[check_disk]=/usr/local/netsaint/libexec/check_disk 85 95 $ARG1$</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+A command definition is just that.  It defines a command.  Commands that can be defined include service checks, service notifications, service event handlers, host checks, host notifications, and host event handlers.  Command definitions can contain <a href="macros.html">macros</a>, but you must make sure that you include only those macros that are "valid" for the circumstances when the command will be used.  More information on what macros are available and when they are "valid" can be found <a href="macros.html">here</a>. The different arguments to a command definition are outlined below.
+</p>
+
+
+<p>
+<table border="1">
+<tr>
+<td valign="top"><strong>&lt;command_name&gt;</strong></td>
+<td>
+This is a short name used to identify the command.  It is referenced in <a href="#contact">contact</a>, <a href="#host">host</a>, and <a href="#service">service</a> definitions.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;command_line&gt;</strong></td>
+<td>
+This is what is actually executed by NetSaint when the command is used for service or host checks, notifications, or <a href="eventhandlers.html">event handlers</a>. Before the command line is executed, all valid <a href="macros.html">macros</a> are replaced with their respective values.  See the documentation on macros for determining when you can use different macros. Note that the command line is <i>not</i> surrounded in quotes.
+</td>
+</tr>
+</table>
+</p>
+
+
+<hr>
+

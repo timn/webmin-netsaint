@@ -1,0 +1,65 @@
+<header>Introduction to NetSaint Configuration</header>
+
+<H3>Timeperiod Configuration</H3>
+
+<p>
+<a name="timeperiod"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Time Period Definition</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td><td><strong>timeperiod[&lt;timeperiod_name&gt;]=&lt;timeperiod_alias&gt;;&lt;sunday_ranges&gt;;&lt;monday_ranges&gt;;&lt;tuesday_ranges&gt;;&lt;wenesday_ranges&gt;;&lt;thursday_ranges&gt;;&lt;friday_ranges&gt;;&lt;saturday_ranges&gt;;</strong></td></tr>
+<tr>
+<td nowrap>Example 1:</td>
+<td><font color="red"><strong>timeperiod[24x7]=All Day, Every Day;00:00-24:00;00:00-24:00;00:00-24:00;00:00-24:00;00:00-24:00;00:00-24:00;00:00-24:00</strong></font></td>
+</tr>
+<tr>
+<td nowrap>Example 2:</td>
+<td><font color="red"><strong>timeperiod[workhours]="Normal" Working Hours;;09:00-17:00;09:00-17:00;09:00-17:00;09:00-17:00;09:00-17:00;</strong></font></td>
+</tr>
+<tr>
+<td nowrap>Example 3:</td>
+<td><font color="red"><strong>timeperiod[none]=No Time Is A Good Time;;;;;;;</strong></font></td>
+</tr>
+<tr>
+<td nowrap>Example 4:</td>
+<td><font color="red"><strong>timeperiod[nonworkhours]=Non-Work Hours;00:00-24:00;00:00-09:00,17:00-24:00;00:00-09:00,17:00-24:00;00:00-09:00,17:00-24:00;00:00-09:00,17:00-24:00;00:00-09:00,17:00-24:00;00:00-24:00</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+A time period is a list of times during various days that are considered to be "valid" times for notifications and service checks. It consists one or more time periods for each day of the week that "rotate" once the week has come to an end.  Exceptions to the normal weekly time range rotations are not suported.
+</p>
+
+<p>
+<table border="1">
+<tr>
+<td valign="top"><strong>&lt;timeperiod_name&gt;</strong></td>
+<td>
+This is a short name used to identify the time period.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;timeperiod_alias&gt;</strong></td>
+<td>
+This is a longer name or description used to identify the time period.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;xday_ranges&gt;</strong></td>
+<td>
+This is a comma-delimited list of time ranges that are "valid" times for a particular day of the week.  Notice that there are seven different days for which you must define time ranges (Sunday through Saturday).  Each time range is in the form of <b>HH:MM-HH:MM</b>, where hours are specified on a 24 hour clock.  For example, <b>00:15-24:00</b> means 12:15am in the morning for this day until 12:20am midnight (a 23 hour, 45 minute total time range).  If you leave a particular day's time range blank, it means that there are no "valid" times for that day.
+</td>
+</tr>
+</table>
+</p>
+
+<hr>
+

@@ -1,0 +1,274 @@
+<header>Introduction to NetSaint Configuration</header>
+
+<H3>Logging Configuration</H3>
+
+<p>
+<a href="#log_level">Log severity level</a><br>
+<a href="#use_syslog">Syslog logging option</a><br>
+<a href="#syslog_level">Syslog severity level</a><br>
+<a href="#log_notifications">Notification logging option</a><br>
+<a href="#log_service_retries">Service check retry logging option</a><br>
+<a href="#log_host_retries">Host retry logging option</a><br>
+<a href="#log_event_handlers">Event handler logging option</a><br>
+</p>
+
+<hr>
+
+<p>
+<a name="log_level"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Log Severity Level</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>log_level=&lt;1-2&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>log_level=1</strong></font></td>
+</tr>
+</table>
+</p>
+This is the level of severity needed for service messages to be logged to the main log file. 
+Values are as follows:
+</p>
+<p>
+<ul>
+<li>1 = Log services which are in <a href="statuslevels.html#WARNING">WARNING</a>, 
+<a href="statuslevels.html#UNKNOWN">UNKNOWN</a>, or <a href="statuslevels.html#CRITICAL">CRITICAL</a> states.
+<li>2 = Log only services which are in a <a href="statuslevels.html#CRITICAL">CRITICAL</a> state.
+</ul>
+</p>
+<p>
+Notes:
+</p>
+<p>
+<ul>
+<li>This should almost *always* be set to 1.  If it isn't your mileage may vary, as I haven't really tested
+the consequences.
+</ul>
+<p>
+
+<p>
+<a name="use_syslog"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Syslog Logging Option</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>use_syslog=&lt;0/1&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>use_syslog=1</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This variable determines whether messages are logged to the syslog facility on your local host.  Values
+are as follows:
+</p>
+<p>
+<ul>
+<li>0 = Don't use syslog facility
+<li>1 = Use syslog facility
+</ul>
+</p>
+
+<p>
+<a name="syslog_level"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Syslog Severity Level</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>syslog_level=&lt;1-2&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>syslog_level=1</strong></font></td>
+</tr>
+</table>
+</p>
+This is the level of severity needed for service messages to be logged to the syslog facility. 
+Values are as follows:
+</p>
+<p>
+<ul>
+<li>1 = Log services which are in <a href="statuslevels.html#WARNING">WARNING</a>, 
+<a href="statuslevels.html#UNKNOWN">UNKNOWN</a>, or <a href="statuslevels.html#CRITICAL">CRITICAL</a> states.
+<li>2 = Log only services which are in a <a href="statuslevels.html#CRITICAL">CRITICAL</a> state.
+</ul>
+</p>
+<p>
+Notes:
+</p>
+<p>
+<ul>
+This should almost *always* be set to 1.  If it isn't your mileage may vary, as I haven't really tested
+the consequences.
+</ul>
+<p>
+
+
+<p>
+<a name="log_notifications"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Notification Logging Option</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>log_notifications=&lt;0/1&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>log_notifications=1</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This variable determines whether or not notification messages are logged.  If you have a lot of contacts
+or regular service failures your log file will grow relatively quickly.  Use this option to keep contact
+notifications from being logged.
+</p>
+<p>
+<ul>
+<li>0 = Don't log notifications
+<li>1 = Log notifications
+</ul>
+</p>
+
+
+<p>
+<a name="log_service_retries"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Service Check Retry Logging Option</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>log_service_retries=&lt;0/1&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>log_service_retries=1</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This variable determines whether or not service check retries are logged.  Service check retries occur when a
+service check results in a non-OK state, but you have configured NetSaint to retry the service more than once before
+responding to the error.  Services in this situation are considered to be in "soft" states.  Logging service check retries
+is mostly useful when attempting to debug NetSaint or test out service <a href="eventhandlers.html">event handlers</a>.
+</p>
+<p>
+<ul>
+<li>0 = Don't log service check retries
+<li>1 = Log service check retries
+</ul>
+</p>
+
+
+<p>
+<a name="log_event_handlers"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Event Handler Logging Option</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>log_event_handlers=&lt;0/1&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>log_event_handlers=1</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This variable determines whether or not service and host <a href="eventhandlers.html">event handlers</a> are logged.
+Event handlers are optional commands that can be run whenever a service or hosts changes state.  Logging event handlers
+is most useful when debuggin NetSaint or first trying out your event handler scripts.
+</p>
+<p>
+<ul>
+<li>0 = Don't log event handlers
+<li>1 = Log event handlers
+</ul>
+</p>
+
+
+<p>
+<a name="log_host_retries"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Host Check Retry Logging Option</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>log_host_retries=&lt;0/1&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>log_host_retries=1</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This variable determines whether or not host check retries are logged.  Logging host check retries
+is mostly useful when attempting to debug NetSaint or test out host <a href="eventhandlers.html">event handlers</a>.
+</p>
+<p>
+<ul>
+<li>0 = Don't log host check retries
+<li>1 = Log host check retries
+</ul>
+</p>
+
+
+<hr>
+

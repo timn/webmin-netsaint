@@ -1,0 +1,10 @@
+icons_per_row=Number of icons per row,0
+main_config=Full path to main configuration file,0
+host_config=Full path to host configuration file,0
+cgi_config=Full path to CGI configuration file,0
+sort_hosts=Sort hosts on view?,1,1-Yes,0-No
+sort_contacts=Sort contacts on view?,1,1-Yes,0-No
+sort_commands=Sort commands on view?,1,1-Yes,0-No
+list_commands_detailed=List commands detailed on view?,1,1-Yes,0-No
+sort_timeperiods=Sort time periods on view?,1,1-Yes,0-No
+sort_services=Sort services on view?,1,1-Yes,0-No

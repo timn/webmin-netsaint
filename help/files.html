@@ -1,0 +1,122 @@
+<header>Introduction to NetSaint Configuration</header>
+
+<H3>File settings</H3>
+
+<p>
+<a href="#log_file">Log file</a><br>
+<a href="#cfg_file">Host configuration file</a><br>
+<a href="#status_file">Status file</a><br>
+<a href="#temp_file">Temp file</a><br>
+</p>
+
+<hr>
+<p>
+<a name="log_file"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Log File</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>log_file=&lt;file_name&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>log_file=/usr/local/netsaint/var/netsaint.log</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This variable specifies where NetSaint should create its main log file.  This should be the first
+variable that you define in your configuration file, as NetSaint will try to write errors that it
+finds in the rest of your configuration data to this file.  This file is never deleted, pruned or 
+rotated by NetSaint.  I suggest adding a cron job to do log rotations every month or so (more often
+if you have a lot of alarms).
+</p>
+
+<p>
+<a name="cfg_file"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Host Configuration File</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>cfg_file=&lt;file_name&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>cfg_file=/usr/local/netsaint/etc/hosts.cfg</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This specifies the host configuration file that NetSaint should use for monitoring.  Host configuration
+files contain configuration data for hosts, host groups, contacts, contact groups, services, commands, etc.
+</p>
+
+<p>
+<a name="status_file"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Status File</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>status_file=&lt;file_name&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>status_file=/usr/local/netsaint/var/status.log</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is the file that NetSaint uses to store the current status of all monitored services.  The status of all hosts associated with the service you monitor are also recorded here.  This file is used by the "status" CGI so that current monitoring status can be reported via a web interface.  The CGIs must have read access to this file in order to function properly.  This file is deleted every time NetSaint stops and recreated when it starts.
+</p>
+
+<p>
+<a name="temp_file"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Temp File</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>temp_file=&lt;file_name&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>temp_file=/usr/local/netsaint/var/netsaint.tmp</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is the temporary file into which NetSaint redirects the standard output and error from the execution of plugins.  The output from the plugins is scooped from the temp file and used for both display in the "status" CGI output and use in notification macros.  This file is deleted after the plugin has been executed.  This file is also used as a scratch file when NetSaint updates the status log.
+</p>
+<hr>
+

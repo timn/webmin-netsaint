@@ -1,0 +1,55 @@
+<header>Introduction to NetSaint Configuration</header>
+
+<H3>Contactgroup Configuration</H3>
+
+<p>
+<a name="contactgroup"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Contact Group Definition</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td><td><strong>contactgroup[&lt;group_name&gt;]=&lt;group_alias&gt;;&lt;contacts&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>contactgroup[nt-admins]=NT Administrators;egalstad,jdoe</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+A contact group definition is used to group one or more contacts together for the purpose of sending out alert/recovery notifications.  When a host or service has a problem or recovers, NetSaint will find the appropriate contact groups to send notifications to, and notify all <a href="#contact">contacts</a> in those contact groups.  This may sound complex, but for most people it doesn't have to be.  It does, however, allow for flexibility in determining who gets notified for particular events.  The different arguments to a contact group definition are outlined below.
+</p>
+
+<p>
+<table border="1">
+<tr>
+<td valign="top"><strong>&lt;group_name&gt;</strong></td>
+<td>
+This is a short name used to identify the contact group.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;group_alias&gt;</strong></td>
+<td>
+This is a longer name or description used to identify the contact group.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;contacts&gt;</strong></td>
+<td>
+This is a list of the <i>short names</i> of <a href="#contact">contacts </a> that should be included
+in this group.   Multiple contact names should be separated by commas.
+</td>
+</tr>
+</table>
+</p>
+
+<hr>
+

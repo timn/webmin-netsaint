@@ -1,0 +1,103 @@
+<header>Introduction to NetSaint Configuration</header>
+
+<H3>Miscellanous Settings</H3>
+
+<p>
+<a href="#sleep_time">Inter-check sleep time</a><br>
+<a href="#interval_length">Timing interval length</a><br>
+<a href="#use_agressive_host_checking">Agressive host checking option</a><br>
+</p>
+
+<hr>
+
+<p>
+<a name="sleep_time"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Inter-Check Sleep Time</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>sleep_time=&lt;seconds&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>sleep_time=1</strong></font></td>
+</tr>
+</table>
+</p>
+This is the number of seconds that NetSaint will sleep before checking to see if the next service check in the
+scheduling queue should be executed.  Note that NetSaint will only sleep after it "catches up" with queued 
+service checks that have fallen behind.
+</p>
+
+<p>
+<a name="interval_length"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Timing Interval Length</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>interval_length=&lt;seconds&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>interval_length=60</strong></font></td>
+</tr>
+</table>
+</p>
+This is the number of seconds per "unit interval" used for timing in the scheduling queue,
+re-notifications, etc. "Units intervals" are used in the host configuration file to determine
+how often to run a service check, how often of re-notify a contact, etc.
+</p>
+<p>
+<strong>Important:</strong>  The default value for this is set to 60, which means that a "unit value"
+of 1 in the host configuration file will mean 60 seconds (1 minute).  I have not really tested other
+values for this variable, so proceed at your own risk if you decide to do so!
+</p>
+
+
+
+<p>
+<a name="use_agressive_host_checking"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Agressive Host Checking Option</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>use_agressive_host_checking=&lt;0/1&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>use_agressive_host_checking=0</strong></font></td>
+</tr>
+</table>
+</p>
+Beginning with release 0.0.4, NetSaint tries to be a little smarter about how and when it checks the status of hosts.  In general, disabling this option will allow NetSaint to make some smarter decisions and check hosts a bit faster.  Enabling this option will increase the amount of time required to check hosts, but may improve reliability a bit.  If you want to know more about exactly what this option does, search the source code in the <b>netsaint.c</b> file for the string "<b>use_agressive_host_checking</b>" and read some of the comments I've added.  Unless you have problems with NetSaint not recognizing that a host recovered, I would suggest <b>not</b> enabling this option.
+</p>
+<p>
+<ul>
+<li>0 = Don't use agressive host checking (default)
+<li>1 = Use agressive host checking
+</ul>
+</p>
+
+<hr>
+

@@ -1,0 +1,180 @@
+<header>Introduction to NetSaint Configuration</header>
+
+<H3>Service Configuration</H3>
+
+<p>
+<a name="service"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Service Definition</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td><td><strong>service[&lt;host&gt;]=&lt;description&gt;;&lt;check_period&gt;;&lt;max_attempts&gt;;&lt;check_interval&gt;;&lt;retry_interval&gt;;&lt;contactgroups&gt;;&lt;notification_interval&gt;;&lt;notification_period&gt;;&lt;notify_recovery&gt;;&lt;notify_critical&gt;;&lt;notify_warning&gt;;&lt;event_handler&gt;;&lt;check_command&gt;</strong></td></tr>
+<tr>
+<td nowrap>Example 1:</td>
+<td><font color="red"><strong>service[rosie]=FTP;24x7;3;5;1;nt-admins;120;24x7;1;1;1;;check_ftp</strong></font></td>
+</tr>
+<tr>
+<td nowrap>Example 2:</td>
+<td><font color="red"><strong>service[dev]=HTTP;24x7;3;5;1;nt-admins;240;24x7;1;1;1;;check_http2!192.168.0.2!/!88</strong></font></td>
+</tr>
+<tr>
+<td nowrap>Example 3:</td>
+<td><font color="red"><strong>service[real]=Zombie Processes;24x7;3;5;1;linux-admins;240;24x7;1;1;1;;check_procs!5!10!Z</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+A service definition is used to identify a "service" that runs on a host.  The term "service" is used very loosely.
+It can mean an actual service that runs on the host (POP, SMTP, HTTP, etc.) or some other type of metric associated
+with the host (response to a ping, number of logged in users, free disk space, etc.).  The different arguments to
+a service definition are outlined below.
+</p>
+
+<p>
+<table border="1">
+<tr>
+<td valign="top"><strong>&lt;host&gt;</strong></td>
+<td>
+This is the <i>short name</i> of the <a href="#host">host</a> that the service "runs" on or is associated with.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;check_period&gt;</strong></td>
+<td>
+This is the short name of the <a href="#timeperiod">time period</a> that identifies when this service can be checked.  Services checks are scheduled in such a way that they are only checked (or rechecked) during times that are valid within the specified service check time period.  See the "Time Periods" documentation in the <a href="theory.html">theory of operation</a> section for more information on how time periods works and potentials problems with using them improperly.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;max_attempts&gt;</strong></td>
+<td>
+This is the number of times that NetSaint will retry the service check if it returns any state other than an <a href="statuslevels.html">OK</a> state.  Setting this value to 1 will cause NetSaint to generate an alert (if the service check detected a problem) without retrying the service check again.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;check_interval&gt;</strong></td>
+<td>
+This is the number of "time units" to wait before scheduling the next "regular" check of the service.  "Regular" checks
+are those that occur when the service is in an <a href="statuslevels.html">OK</a> state or when the service is in a non-OK
+state, but has already been rechecked <b>max_attempts</b> number of times.  Unless you've changed the <b>interval_length</b> value in the <a href="configmain.html">main configuration file</a> from the default value of 60, this number will mean minutes.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;retry_interval&gt;</strong></td>
+<td>
+This is the number of "time units" to wait before scheduling a re-check of the service.  Services are rescheduled
+at the retry interval when the have changed to a non-OK <a href="statuslevels.html">state</a>.  Once the service has been
+retried <b>max_attempts</b> times without a change in its status, it will revert to being scheduled at its "normal" rate
+as defined by the <b>check_interval</b> value. Unless you've changed the <b>interval_length</b> value in the <a href="configmain.html">main configuration file</a> from the default value of 60, this number will mean minutes.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;contactgroups&gt;</strong></td>
+<td>
+This is a comma-delimited list of the short names of <a href="#contactgroup">contact groups</a> that should be notified about problems or recoveries for this service.  If a problem or recovery occurs for this service, NetSaint will attempt to notify all the contacts in each contact group (depending on the notification options that are set below).
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;notification_interval&gt;</strong></td>
+<td>
+This is the number of "time units" to wait before re-notifying
+a contact that this service is <i>still</i> at a non-OK state.  Unless you've changed the 
+<b>interval_length</b> value in the <a href="configmain.html">main configuration file</a> from the default
+value of 60, this number will mean minutes.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;notification_period&gt;</strong></td>
+<td>
+This is the short name of the <a href="#timeperiod">time period</a> that identifies when notifications about problems or recoveries for this service may be sent out.  If a service problem or recovery occurs outside valid times within this time period, notifications will not be sent out.  See the "Time Periods" documentation in the <a href="theory.html">theory of operation</a> section for more information on how time periods works and potentials problems with using them improperly.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;notify_recovery&gt;</strong></td>
+<td>
+This value determines whether or not alert notifications will be generated if the service recovers from
+a non-OK state.  Set this value to <b>1</b> if the service should generate alerts for recoveries, 
+<b>0</b> if it shouldn't.
+Note: If a <a href="#contact">contact</a> is configured to not receive recovery notifications, they will
+not be notified of any recoveries for this service, regardless of this setting.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;notify_critical&gt;</strong></td>
+<td>
+This value determines whether or not alert notifications will be generated if the service is in a 
+<a href="statuslevels.html">CRITICAL</a> state.  Set this value to <b>1</b> if the service 
+should generate alerts for critical states, <b>0</b> if it shouldn't.
+Note: If a <a href="#contact">contact</a> is configured to not receive critical notifications, they will
+not be notified of any critical states for this service, regardless of this setting.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;notify_warning&gt;</strong></td>
+<td>
+This value determines whether or not alert notifications will be generated if the service is in a 
+<a href="statuslevels.html">WARNING</a> or UNKNOWN state.  Set this value to <b>1</b> if the service 
+should generate alerts for warning/unknown states, <b>0</b> if it shouldn't.
+Note: If a <a href="#contact">contact</a> is configured to not receive warning/unknown notifications, they will
+not be notified of any warning/unknown states for this service, regardless of this setting.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;event_handler&gt;</strong></td>
+<td>
+This is the <i>short name</i> of the <a href="#command">command</a> that should be run whenever a change
+in the <a href="statuslevels.html">status</a> of the services is detected (i.e. whenever it goes down or recovers).  
+Read the documentation on <a href="eventhandlers.html">event handlers</a> for a more detailed explanation of how to 
+write scripts for handling events.  If you do not wish to define an event handler for the service, leave this option blank
+(as shown in the examples above).
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;check_command&gt;</strong></td>
+<td>
+<p>
+This is the command that NetSaint will run in order to check the status of the service.  There are three command
+formats that can be used:
+</p>
+<p>
+<table border="0">
+<tr>
+<td valign="top"><strong>1. "Vanilla" Command:</strong></td>
+<td>
+The command name is just the name of <a href="#command">command</a> that was previously defined.  Example 1
+above shows this type of command.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>2. Command w/ Arguments:</strong></td>
+<td>
+This is basically the same as the "vanilla" command style, but with command options separated by a <b>!</b>
+character.  Example 2 above shows this type of command.  Arguments are separated from the
+command name (and other arguments) with the <b>!</b> character.  The command should be defined to make use of 
+the $ARGx$ <a href="macros.html">macros</a>. In Example 2 above, $ARG1$ would resolve to <b>134.84.92.128</b>, 
+$ARG2$ would resolve to <b>/</b>, and $ARG3$ would resolve to <b>88</b> for that particular service.  
+Note: NetSaint will handle a maximum of sixteen command line arguments ($ARG1$ through $ARG16$).
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>3. "Raw" Command Line:</strong></td>
+<td>
+You may optionally specify an actual command line to be executed.  To do so you must enclose the entire command
+line in double quotes.  The outer double quotes will be stripped off before the command is actually executed.  No macros are processed inside of raw command lines.  Note: I haven't really tested this format too much, but it should work.  Remember that the command must return a proper <a href="statuslevels.html">status level</a>. See the documentation on <a href="pluginhowto.html">writing plugins</a> for numeric codes for each status level.
+</td>
+</tr>
+</table>
+</p>
+</td>
+</tr>
+</table>
+</p>
+
+<hr>
+

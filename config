@@ -1,0 +1,10 @@
+icons_per_row=4
+main_config=/etc/netsaint/netsaint.cfg
+host_config=/etc/netsaint/hosts.cfg
+cgi_config=/home/httpd/cgi-bin/nscgi.cfg
+sort_hosts=1
+sort_contacts=1
+sort_commands=1
+list_commands_detailed=1
+sort_timeperiods=1
+sort_services=1
