@@ -1,6 +1,6 @@
 
 #    NetSaint Configuration Webmin Module
-#    Copyright (C) 1999/2000 by Tim Niemueller, Stephen Nodvin, LinuxTel Associates
+#    Copyright (C) 1999-2000 by Tim Niemueller, Stephen Nodvin, LinuxTel Associates
 #    Written by Tim Niemueller <tim@niemueller.de> - http://www.niemueller.de
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -17,9 +17,15 @@
 
 
 do '../web-lib.pl';
+
 $|=1;
 &init_config("netsaint");
 %access = &get_module_acl();
+
+(-e $config{'main_config'}) || &error(&text('index_merr', $config{'main_config'}, "/config.cgi?$module_name"));
+(-e $config{'host_config'}) || &error(&text('index_herr', $config{'host_config'}, "/config.cgi?$module_name"));
+(-e $config{'cgi_config'}) || &error(&text('index_cerr', $config{'cgi_config'}, "/config.cgi?$module_name"));
+
 &ReadParse();
 
 # parse_config(configfile)
@@ -81,5 +87,5 @@ sub find_struct {
 return @rv;
 }
 
-$version="0.76.1";
+$version="0.79.1";
 ### END.

@@ -1,0 +1,270 @@
+<header>NetSaint Configuration</header>
+
+<H3>CGI Configuration</H3>
+
+<p>
+<a href="#use_authentication">Authentication usage</a><br>
+<a href="#default_user_name">Default user name</a><br>
+<a href="#authorized_for_system_information">System/process information access</a><br>
+<a href="#authorized_for_system_commands">System/process command access</a><br>
+<a href="#authorized_for_configuration_information">Configuration information access</a><br>
+<a href="#authorized_for_all_hosts">Global host information access</a><br>
+<a href="#authorized_for_all_host_commands">Global host command access</a><br>
+<a href="#authorized_for_all_services">Global service information access</a><br>
+<a href="#authorized_for_all_service_commands">Global service command access</a><br>
+</p>
+
+<hr>
+
+<p>
+<a name="use_authentication"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Authentication Usage</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>use_authentication=&lt;0/1&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>use_authentication=1</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This option controls whether or not the CGIs will use the authentication and authorization functionality when determining what information and commands users have access to.  I would strongly suggest that you use the authentication functionality for the CGIs.  If you decide not to use authentication, make sure to remove the <a href="cgis.html#command_cgi">command CGI</a> to prevent unauthorized users from issuing commands to NetSaint.  The CGI will not issue commands to NetSaint if authentication is disabled, but I would suggest removing it altogether just to be on the safe side.  More information on how to setup authentication and configure authorization for the CGIs can be found <a href="cgiauth.html">here</a>.
+</p>
+<p>
+<ul>
+<li>0 = Don't use authentication functionality
+<li>1 = Use authentication and authorization functionality (default)
+</ul>
+</p>
+
+
+<p>
+<a name="default_user_name"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Default User Name</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>default_user_name=&lt;username&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>default_user_name=guest</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+Setting this variable will define a default username that can access the CGIs.  This allows people within a secure domain (i.e., behind a firewall) to access the CGIs without necessarily having to authenticate to the web server.   You may want to use this to avoid having to use basic authentication if you are not using a secure server, as basic authentication transmits passwords in clear text over the Internet.
+</p>
+<p>
+<strong>Important:</strong>  Do <i>not</i> define a default username unless you are running a secure web server and are sure that everyone who has access to the CGIs has been authenticated in some manner!  If you define this variable, anyone who has not authenticated to the web server will inherit all rights you assign to this user!
+</p>
+
+<p>
+<a name="authorized_for_system_information"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>System/Process Information Access</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>authorized_for_system_information=&lt;user1&gt;,&lt;user2&gt;,&lt;user3&gt;,...&lt;user<i>n</i>&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>authorized_for_system_information=netsaintadmin,theboss</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is a comma-delimited list of names of <i>authenticated users</i> who can view system/process information in the <a href="cgis.html#extinfo_cgi">extended information CGI</a>.  Users in this list are <i>not</i> automatically authorized to issue system/process commands.  If you want users to be able to issue system/process commands as well, you must add them to the <a href="#authorized_for_system_commands">authorized_for_system_commands</a> variable.  More information on how to setup authentication and configure authorization for the CGIs can be found <a href="cgiauth.html">here</a>.
+</p>
+
+
+<p>
+<a name="authorized_for_system_commands"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>System/Process Command Access</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>authorized_for_system_commands=&lt;user1&gt;,&lt;user2&gt;,&lt;user3&gt;,...&lt;user<i>n</i>&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>authorized_for_system_commands=netsaintadmin</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is a comma-delimited list of names of <i>authenticated users</i> who can issue system/process commands via the <a href="cgis.html#cmd_cgi">command CGI</a>.  Users in this list are <i>not</i> automatically authorized to view system/process information.  If you want users to be able to view system/process information as well, you must add them to the <a href="#authorized_for_system_information">authorized_for_system_information</a> variable.  More information on how to setup authentication and configure authorization for the CGIs can be found <a href="cgiauth.html">here</a>.
+</p>
+
+
+<p>
+<a name="authorized_for_configuration_information"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Configuration Information Access</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>authorized_for_configuration_information=&lt;user1&gt;,&lt;user2&gt;,&lt;user3&gt;,...&lt;user<i>n</i>&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>authorized_for_configuration_information=netsaintadmin</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is a comma-delimited list of names of <i>authenticated users</i> who can view configuration information in the <a href="cgis.html#config_cgi">configuration CGI</a>.  Users in this list can view information on all configured hosts, host groups, services, contacts, contact groups, time periods, and commands.  More information on how to setup authentication and configure authorization for the CGIs can be found <a href="cgiauth.html">here</a>.
+</p>
+
+
+<p>
+<a name="authorized_for_all_hosts"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Global Host Information Access</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>authorized_for_all_hosts=&lt;user1&gt;,&lt;user2&gt;,&lt;user3&gt;,...&lt;user<i>n</i>&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>authorized_for_all_hosts=netsaintadmin,theboss</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is a comma-delimited list of names of <i>authenticated users</i> who can view status and configuration information for all hosts.  Users in this list are also automatically authorized to view information for all services.  Users in this list are <i>not</i> automatically authorized to issue commands for all hosts or services.  If you want users able to issue commands for all hosts and services as well, you must add them to the <a href="#authorized_for_all_host_commands">authorized_for_all_host_commands</a> variable.  More information on how to setup authentication and configure authorization for the CGIs can be found <a href="cgiauth.html">here</a>.
+</p>
+
+
+<p>
+<a name="authorized_for_all_host_commands"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Global Host Command Access</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>authorized_for_all_host_commands=&lt;user1&gt;,&lt;user2&gt;,&lt;user3&gt;,...&lt;user<i>n</i>&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>authorized_for_all_host_commands=netsaintadmin</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is a comma-delimited list of names of <i>authenticated users</i> who can issue commands for all hosts via the <a href="cgis.html#cmd_cgi">command CGI</a>.  Users in this list are also automatically authorized to issue commands for all services.  Users in this list are <i>not</i> automatically authorized to view status or configuration information for all hosts or services.  If you want users able to view status and configuration information for all hosts and services as well, you must add them to the <a href="#authorized_for_all_hosts">authorized_for_all_hosts</a> variable.  More information on how to setup authentication and configure authorization for the CGIs can be found <a href="cgiauth.html">here</a>.
+</p>
+
+
+<p>
+<a name="authorized_for_all_services"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Global Service Information Access</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>authorized_for_all_services=&lt;user1&gt;,&lt;user2&gt;,&lt;user3&gt;,...&lt;user<i>n</i>&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>authorized_for_all_services=netsaintadmin,theboss</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is a comma-delimited list of names of <i>authenticated users</i> who can view status and configuration information for all services.  Users in this list are <i>not</i> automatically authorized to view information for all hosts.  Users in this list are <i>not</i> automatically authorized to issue commands for all services.  If you want users able to issue commands for all services as well, you must add them to the <a href="#authorized_for_all_service_commands">authorized_for_all_service_commands</a> variable.  More information on how to setup authentication and configure authorization for the CGIs can be found <a href="cgiauth.html">here</a>.
+</p>
+
+
+<p>
+<a name="authorized_for_all_service_commands"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Global Service Command Access</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>authorized_for_all_service_commands=&lt;user1&gt;,&lt;user2&gt;,&lt;user3&gt;,...&lt;user<i>n</i>&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>authorized_for_all_service_commands=netsaintadmin</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is a comma-delimited list of names of <i>authenticated users</i> who can issue commands for all services via the <a href="cgis.html#cmd_cgi">command CGI</a>.  Users in this list are <i>not</i> automatically authorized to issue commands for all hosts.  Users in this list are <i>not</i> automatically authorized to view status or configuration information for all hosts.  If you want users able to view status and configuration information for all services as well, you must add them to the <a href="#authorized_for_all_services">authorized_for_all_services</a> variable.  More information on how to setup authentication and configure authorization for the CGIs can be found <a href="cgiauth.html">here</a>.
+</p>
+
+<hr>
+

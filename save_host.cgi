@@ -26,18 +26,23 @@
 require './netsaint-lib.pl';
 
 $whatfailed=$text{'shost_error'};
-(-e $config{'main_config'}) || &error(&text('index_merr', $config{'main_config'}, "/config.cgi?$module_name"));
-(-e $config{'host_config'}) || &error(&text('index_herr', $config{'host_config'}, "/config.cgi?$module_name"));
-(-e $config{'cgi_config'}) || &error(&text('index_cerr', $config{'cgi_config'}, "/config.cgi?$module_name"));
 
 @conf=&parse_config($config{'host_config'});
+@cgiconf=&parse_config($config{'cgi_config'});
 
 @hosts=&find_struct('host', \@conf);
+@cgihosts=&find_struct('hostextinfo', \@cgiconf);
 
 $host=0;
 foreach $h (@hosts) {
  if ($h->{'value'} eq $in{'name'}) { $host=$h; last; }
 }
+
+$cgihost=0;
+foreach $h (@cgihosts) {
+ if ($h->{'value'} eq $in{'name'}) { $cgihost=$h; last; }
+}
+
 
 if ($host) {
  if ($in{'delete'}) {
@@ -132,6 +137,7 @@ if ($in{'notunreachable'} !~ /^[01]$/) {
 
 
 $cfile=&read_file_lines($config{'host_config'});
+$cgifile=&read_file_lines($config{'cgi_config'});
 
 
 if ($host) {
@@ -141,6 +147,11 @@ if ($host) {
    splice(@{$cfile}, $host->{'line'}, 1);
    &flush_file_lines();
    @conf=&parse_config($config{'host_config'});
+   if ($cgihost) {
+     splice(@{$cgifile}, $cgihost->{'line'}, 1);
+     &flush_file_lines();
+     @cgiconf=&parse_config($config{'cgi_config'});
+   }
  } else {
    # the host exists, we change it
    local $ph = $in{'parenthost'} ? $in{'parenthost'} : "";
@@ -187,6 +198,44 @@ if ($host) {
       );
  }
 }
+
+if ($cgihost) {
+
+ if ($in{'delete'}) {
+   # we delete an existing host
+   splice(@{$cgifile}, $cgihost->{'line'}, 1);
+   &flush_file_lines();
+   @cgiconf=&parse_config($config{'cgi_config'});
+ } else {
+   # the host exists, we change it
+   $cgifile->[$cgihost->{'line'}]=join('=',
+                                       "hostextinfo[$cgihost->{'value'}]",
+                                       join(';',
+                                            $in{'notesurl'},
+                                            $in{'imageicon'},
+                                            $in{'imagevrml'},
+                                            $in{'imagegd'},
+                                            $in{'alttag'}
+                                            )
+                                       );
+ }
+} else {
+ if (!$in{'delete'}) {
+   push(@{$cgifile}, join('=',
+                        "hostextinfo[$in{'name'}]",
+                        join(';',
+                             $in{'notesurl'},
+                             $in{'imageicon'},
+                             $in{'imagevrml'},
+                             $in{'imagegd'},
+                             $in{'alttag'}
+                             )
+                        )
+      );
+ }
+}
+
+
 
 
 local @hostgroups=&find_struct('hostgroup', \@conf);

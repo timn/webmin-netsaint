@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 #    NetSaint Configuration Webmin Module
-#    Copyright (C) 1999/2000 by Tim Niemueller, Stephen Nodvin, LinuxTel Associates
+#    Copyright (C) 1999-2000 by Tim Niemueller, Stephen Nodvin, LinuxTel Associates
 #    Written by Tim Niemueller <tim@niemueller.de> - http://www.niemueller.de
 
 #    This program is free software; you can redistribute it and/or modify
@@ -19,16 +19,8 @@
 #    Created 28.12.1999
 
 
-#######################
-#    Configuration    #
-#######################
-
-require './netsaint-lib.pl';
-
 $whatfailed=$text{'timeperiod_error'};
-(-e $config{'main_config'}) || &error(&text('index_merr', $config{'main_config'}, "/config.cgi?$module_name"));
-(-e $config{'host_config'}) || &error(&text('index_herr', $config{'host_config'}, "/config.cgi?$module_name"));
-(-e $config{'cgi_config'}) || &error(&text('index_cerr', $config{'cgi_config'}, "/config.cgi?$module_name"));
+require './netsaint-lib.pl';
 
 @conf=&parse_config($config{'host_config'});
 

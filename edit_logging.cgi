@@ -19,10 +19,6 @@
 #    Created 21.12.1999
 
 
-#######################
-#    Configuration    #
-#######################
-
 require './netsaint-lib.pl';
 $access{'logging'} || &error($text{'log_notallowed'});
 
@@ -32,6 +28,11 @@ $whatfailed=$text{'log_error'};
 (-e $config{'cgi_config'}) || &error(&text('index_cerr', $config{'cgi_config'}, "/config.cgi?$module_name"));
 
 @conf=&parse_config($config{'main_config'});
+
+$tmp=&find_name('log_level', \@conf);
+if ($tmp->{'values'}->[0] == 1) { $level1=" SELECTED" }
+                           else { $level2=" SELECTED" }
+
 
 $tmp=&find_name('use_syslog', \@conf);
 if ($tmp->{'values'}->[0]) { $usesyslog=" CHECKED" }
@@ -57,6 +58,19 @@ $tmp=&find_name('log_host_retries', \@conf);
 if ($tmp->{'values'}->[0]) { $horet=" CHECKED" }
                       else { $nhoret=" CHECKED" }
 
+$tmp=&find_name('log_rotation_method', \@conf);
+if ($tmp->{'values'}->[0] eq "n") { $lrot_n=" SELECTED" }
+  elsif ($tmp->{'values'}->[0] eq "h") { $lrot_h=" SELECTED" }
+  elsif ($tmp->{'values'}->[0] eq "d") { $lrot_d=" SELECTED" }
+  elsif ($tmp->{'values'}->[0] eq "w") { $lrot_w=" SELECTED" }
+  elsif ($tmp->{'values'}->[0] eq "m") { $lrot_m=" SELECTED" }
+
+$tmp=&find_name('log_archive_path', \@conf);
+$logrotarch_value=$tmp->{'values'}->[0];
+$logselector=&file_chooser_button('logrotarch', 0, 0);
+
+
+
 
 &header($text{'log_title'}, "", "logging", 1, 0, undef,
         "Written by<BR><A HREF=mailto:tim\@niemueller.de>Tim Niemueller</A><BR><A HREF=http://www.niemueller.de>Home://page</A>");
@@ -74,6 +88,18 @@ print <<EOM;
       <B>$text{'log_header'}</B>
      </TD>
     </TR>
+    <TR>
+     <TD $cb>
+      <B>$text{'log_level'}</B>
+     </TD>
+     <TD $cb>
+       <SELECT NAME="loglevel">
+        <OPTION VALUE="1"$level1>1
+        <OPTION VALUE="2"$level2>2
+       </SELECT>
+     </TD>
+    </TR>
+
     <TR>
      <TD $cb>
       <B>$text{'log_use_syslog'}</B>
@@ -128,7 +154,28 @@ print <<EOM;
       <INPUT TYPE=radio NAME="eventhandler" VALUE=0 SIZE=35$nevha> $text{'no'}
      </TD>
     </TR>
-
+    <TR>
+     <TD $cb>
+      <B>$text{'log_rotate'}</B>
+     </TD>
+     <TD $cb>
+      <SELECT NAME="logrotate">
+       <OPTION VALUE="n"$lrot_n>$text{'log_rotate_n'}
+       <OPTION VALUE="h"$lrot_h>$text{'log_rotate_h'}
+       <OPTION VALUE="d"$lrot_d>$text{'log_rotate_d'}
+       <OPTION VALUE="w"$lrot_w>$text{'log_rotate_w'}
+       <OPTION VALUE="m"$lrot_m>$text{'log_rotate_m'}
+      </SELECT>
+     </TD>
+    </TR>
+    <TR>
+     <TD $cb>
+      <B>$text{'log_rotate_archive'}</B>
+     </TD>
+     <TD $cb>
+      <INPUT TYPE=text NAME="logrotarch" VALUE="$logrotarch_value" SIZE=25> $logselector
+     </TD>
+    </TR>
    </TABLE>
   </TD>
  </TR>

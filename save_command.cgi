@@ -19,16 +19,9 @@
 #    Created 09.01.2000
 
 
-#######################
-#    Configuration    #
-#######################
-
+$whatfailed=$text{'scommand_error'};
 require './netsaint-lib.pl';
 
-$whatfailed=$text{'scommand_error'};
-(-e $config{'main_config'}) || &error(&text('index_merr', $config{'main_config'}, "/config.cgi?$module_name"));
-(-e $config{'host_config'}) || &error(&text('index_herr', $config{'host_config'}, "/config.cgi?$module_name"));
-(-e $config{'cgi_config'}) || &error(&text('index_cerr', $config{'cgi_config'}, "/config.cgi?$module_name"));
 
 @conf=&parse_config($config{'host_config'});
 
@@ -87,6 +80,10 @@ if ($command) {
 
 
 &flush_file_lines();
-&redirect("edit_command.cgi?name=$in{'name'}");
+if ($in{'delete'}) {
+ &redirect("list_commands.cgi");
+} else {
+ &redirect("edit_command.cgi?name=$in{'name'}");
+}
 
 ### END of save_command.cgi ###.

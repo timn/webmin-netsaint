@@ -1,4 +1,4 @@
-<header>Introduction to NetSaint Configuration</header>
+<header>NetSaint Configuration</header>
 
 <H3>File settings</H3>
 
@@ -7,6 +7,7 @@
 <a href="#cfg_file">Host configuration file</a><br>
 <a href="#status_file">Status file</a><br>
 <a href="#temp_file">Temp file</a><br>
+<a href="#check_external_commands">Full path to external command file </a><br>
 </p>
 
 <hr>
@@ -118,5 +119,42 @@ This is the file that NetSaint uses to store the current status of all monitored
 <p>
 This is the temporary file into which NetSaint redirects the standard output and error from the execution of plugins.  The output from the plugins is scooped from the temp file and used for both display in the "status" CGI output and use in notification macros.  This file is deleted after the plugin has been executed.  This file is also used as a scratch file when NetSaint updates the status log.
 </p>
-<hr>
 
+
+
+<p>
+<a name="check_external_commands"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>External Command Check Option</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>check_external_commands=&lt;0/1&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>check_external_commands=1</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This option determines whether or not NetSaint will check the <a href="http://www.netsaint.org/docs/0_0_5/command_file">command file</a> for internal commands it should execute.  This option must be enabled if you plan on using the <a href="cgis.html#command_cgi">command CGI</a> to issue commands via the web interface.  Third party programs can also issue commands to NetSaint by writing to the command file, provided proper rights to the file have been granted as outlined in <a href="faqs.html#command_file_permissions">this FAQ</a>.  More information on external commands can be found <a href="extcommands.html">here</a>.
+</p>
+<p>
+<ul>
+<li>0 = Don't check external commands (default)
+<li>1 = Check external commands
+</ul>
+</p>
+
+
+
+
+<hr>

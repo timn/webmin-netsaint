@@ -1,40 +1,45 @@
-<header>Introduction to NetSaint Configuration</header>
+<header>NetSaint Configuration</header>
 
 <H3>Miscellanous Settings</H3>
 
 <p>
-<a href="#sleep_time">Inter-check sleep time</a><br>
+<a href="#program_mode">Program mode</a><br>
 <a href="#interval_length">Timing interval length</a><br>
 <a href="#use_agressive_host_checking">Agressive host checking option</a><br>
+<a href="#inter_check_delay_method">Method to use to determine time between checks</a><br>
+<a href="#global_host_event_handler">Global host eventhandler</a><br>
+<a href="#global_service_event_handler">Global service Eventhandler</a><br>
+<a href="#sleep_time">Inter-check sleep time</a><br>
+<a href="#service_interleave_factor">Service check interleave factor </a><br>
+<a href="#max_concurrent_checks">Maximum concurrent checks</a><br>
+<a href="#service_reaper_frequency">Service reaper frequency</a><br>
+
 </p>
 
 <hr>
 
 <p>
-<a name="sleep_time"></a>
+<a name="program_mode"></a>
 <table border="0" width="100%">
 <tr>
-<td bgcolor="#cbcbcb"><strong>Inter-Check Sleep Time</strong></td>
+<td bgcolor="#cbcbcb"><strong>Program Mode</strong></td>
 </tr>
 </table>
 </p>
-
 <p>
 <table border="0">
 <tr>
 <td>Format:</td>
-<td><strong>sleep_time=&lt;seconds&gt;</strong></td>
+<td><strong>program_mode=&lt;a/s&gt;</strong></td>
 </tr>
 <tr>
 <td>Example:</td>
-<td><font color="red"><strong>sleep_time=1</strong></font></td>
+<td><font color="red"><strong>program_mode=a</strong></font></td>
 </tr>
 </table>
 </p>
-This is the number of seconds that NetSaint will sleep before checking to see if the next service check in the
-scheduling queue should be executed.  Note that NetSaint will only sleep after it "catches up" with queued 
-service checks that have fallen behind.
-</p>
+
+
 
 <p>
 <a name="interval_length"></a>
@@ -97,6 +102,208 @@ Beginning with release 0.0.4, NetSaint tries to be a little smarter about how an
 <li>0 = Don't use agressive host checking (default)
 <li>1 = Use agressive host checking
 </ul>
+</p>
+
+
+
+<p>
+<a name="inter_check_delay_method"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Inter-Check Delay Method</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>inter_check_delay_method=&lt;n/d/s&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>inter_check_delay_method=s</strong></font></td>
+</tr>
+</table>
+</p>
+This option allows you to control how service checks are initially "spread out" in the event queue.  Using a "smart" delay calculation (the default) will cause NetSaint to calculate an average check interval and spread initial checks of all services out over that interval, thereby helping to eliminate CPU load spikes.  Using no delay is generally <i>not</i> recommended unless you are testing the <a href="parallelization.html">service check parallelization</a> functionality.  Using no delay will cause all service checks to be scheduled for execution at the same time.  This means that you will generally have large CPU spikes when the services are all executed in parallel.  Values are as follows:
+</p>
+<p>
+<ul>
+<li>n = Don't use any delay - schedule all service checks to run immediately (i.e. at the same time!)
+<li>d = Use a "dumb" delay of 1 second between service checks
+<li>s = Use a "smart" delay calculation to spread service checks out evenly (default)
+</ul>
+</p>
+
+
+
+<p>
+<a name="global_host_event_handler"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Global Host Event Handler Option</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>global_host_event_handler=&lt;command&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>global_host_event_handler=log-host-event-to-db</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This option allows you to specify a host event handler command that is to be run for every host state change.  The global event handler is executed immediately prior to the event handler that you have optionally specified in each <a href="confighost.html#host">host definition</a>.  The <i>command</i> argument is the short name of a <a href="confighost.html#command">command definition</a> that you define in your host configuration file.  More information on event handlers can be found <a href="eventhandlers.html">here</a>.
+</p>
+
+
+<p>
+<a name="global_service_event_handler"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Global Service Event Handler Option</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>global_service_event_handler=&lt;command&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>global_service_event_handler=log-service-event-to-db</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This option allows you to specify a service event handler command that is to be run for every service state change.  The global event handler is executed immediately prior to the event handler that you have optionally specified in each <a href="confighost.html#service">service definition</a>.  The <i>command</i> argument is the short name of a <a href="confighost.html#command">command definition</a> that you define in your host configuration file.  More information on event handlers can be found <a href="eventhandlers.html">here</a>.
+</p>
+
+
+
+<p>
+<a name="sleep_time"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Inter-Check Sleep Time</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>sleep_time=&lt;seconds&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>sleep_time=1</strong></font></td>
+</tr>
+</table>
+</p>
+This is the number of seconds that NetSaint will sleep before checking to see if the next service check in the
+scheduling queue should be executed.  Note that NetSaint will only sleep after it "catches up" with queued 
+service checks that have fallen behind.
+</p>
+
+
+
+<p>
+<a name="service_interleave_factor"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Service Interleave Factor</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>service_interleave_factor=&lt;s|<i>n</i>&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>service_interleave_factor=s</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This variable determines how service checks are interleaved. Interleaving allows for a more even distribution of service checks, reduced load on <i>remote</i> hosts, and faster overall detection of host problems.  With the introduction of service check <a href="parallelization.html">parallelization</a>, remote hosts could get bombarded with checks if interleaving was not implemented.  This could cause the service checks to fail or return incorrect results if the remote host was overloaded with processing other service check requests.  Setting this value to 1 is equivalent to not interleaving the service checks (this is how versions of NetSaint previous to 0.0.5 worked).  Set this value to <b>s</b> (smart) for automatic calculation of the interleave factor unless you have a specific reason to change it.  The best way to understand how interleaving works is to watch the <a href="cgis.html#status_cgi">status CGI</a> (detailed view) when NetSaint is just starting.  You should see that the service check results are spread out as they begin to appear.
+<ul>
+<li><i>n</i> = A number greater than or equal to 1 that specifies the interleave factor to use.  An interleave factor of 1 is equivalent to not interleaving the service checks.
+<li>s = Use a "smart" interleave factor calculation (default)
+</ul>
+</p>
+
+
+
+<p>
+<a name="max_concurrent_checks"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Maximum Concurrent Service Checks</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>max_concurrent_checks=&lt;max_checks&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>max_concurrent_checks=20</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This option allows you to specify the maximum number of service checks that can be run in <a href="parallelization.html">parallel</a> at any given time.  Specifying a value of 1 for this variable essentially prevents any service checks from being parallelized.  You'll have to modify this value based on the system resources you have available on the machine that runs NetSaint, as it directly affects the maximum load that will be imposed on the system (processor utilization, memory, etc.).
+</p>
+
+
+
+<p>
+<a name="service_reaper_frequency"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Service Reaper Frequency</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>service_reaper_frequency=&lt;frequency_in_seconds&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>service_reaper_frequency=10</strong></font></td>
+</tr>
+</table>
+</p>
+This option allows you to control the frequency <i>in seconds</i> of service "reaper" events.  "Reaper" events process the results from <a href="parallelization.html">parallelized service checks</a> that have finished executing.  These events consitute the core of the monitoring logic in NetSaint.
 </p>
 
 <hr>

@@ -31,6 +31,7 @@ $whatfailed=$text{'host_error'};
 (-e $config{'cgi_config'}) || &error(&text('index_cerr', $config{'cgi_config'}, "/config.cgi?$module_name"));
 
 @conf=&parse_config($config{'host_config'});
+@cgiconf=&parse_config($config{'cgi_config'});
 
 @hosts=&find_struct('host', \@conf);
 
@@ -197,7 +198,6 @@ print "      <OPTION VALUE=0";
 @commands=&find_struct('command', \@conf);
 
 foreach $c (@commands) {
- next if ($c->{'value'} eq $host->{'value'});
  print "      <OPTION VALUE=\"$c->{'value'}\"";
  print $c->{'value'} eq $host->{'values'}->[3] ? " SELECTED" :"";
  print ">$c->{'value'}\n";
@@ -219,12 +219,11 @@ print <<EOM;
      <TD $cb COLSPAN=3>
       <SELECT NAME="eventhandler">
 EOM
-print "      <OPTION VALUE=0";
+print "      <OPTION VALUE=\"\"";
  print ! $host->{'values'}->[10] ? " SELECTED" :"";
  print ">$text{'host_eventhandler_none'}\n";
 
 foreach $c (@commands) {
- next if ($c->{'value'} eq $host->{'value'});
  print "      <OPTION VALUE=\"$c->{'value'}\"";
  print $c->{'value'} eq $host->{'values'}->[10] ? " SELECTED" :"";
  print ">$c->{'value'}\n";
@@ -234,7 +233,7 @@ print <<EOM;
      </TD>
     </TR>
     <TR>
-     <TD $cb>
+     <TD $cb VALIGN=center>
       <B>$text{'host_groups'}</B>
      </TD>
      <TD $cb COLSPAN=3>
@@ -259,6 +258,90 @@ print <<EOM;
   </TD>
  </TR>
 </TABLE>
+<BR>
+
+EOM
+
+
+@cgihosts=&find_struct('hostextinfo', \@cgiconf);
+
+foreach $h (@cgihosts) {
+  if ($h->{'value'} eq $host->{'value'}) {
+    $cgihost=$h;
+    last;
+  }
+}
+
+if ($cgihost) {
+  $usecgiextinfo=" CHECKED";
+} else {
+  $nusecgiextinfo=" CHECKED";
+}
+
+print <<EOM;
+
+<TABLE BORDER=2 CELLPADDING=0 CELLSPACING=0 WIDTH=100% $cb>
+ <TR>
+  <TD>
+   <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH=100% $cb>
+    <TR>
+     <TD $tb COLSPAN=4>
+      <B>$text{'host_extinfo'}</B>
+     </TD>
+    </TR>
+    <TR>
+
+     <TD $cb>
+      <B>$text{'host_use_cgiextinfo'}</B>
+     </TD>
+     <TD $cb>
+      <INPUT TYPE=radio NAME="usecgiextinfo" VALUE="1"$usecgiextinfo> $text{'yes'}
+      <INPUT TYPE=radio NAME="usecgiextinfo" VALUE="0"$nusecgiextinfo> $text{'no'}
+     </TD>
+
+     <TD $cb>
+      <B>$text{'host_notes_url'}</B>
+     </TD>
+     <TD $cb>
+      <INPUT TYPE=text NAME="notesurl" SIZE=30 VALUE="$cgihost->{'values'}->[0]">
+     </TD>
+    </TR>
+    <TR>
+     <TD $cb>
+      <B>$text{'host_img_icon'}</B>
+     </TD>
+     <TD $cb>
+      <INPUT TYPE=text NAME="imageicon" SIZE=30 VALUE="$cgihost->{'values'}->[1]">
+     </TD>
+
+     <TD $cb>
+      <B>$text{'host_img_vrml'}</B>
+     </TD>
+     <TD $cb>
+      <INPUT TYPE=text NAME="imagevrml" SIZE=30 VALUE="$cgihost->{'values'}->[2]">
+     </TD>
+    </TR>
+    <TR>
+     <TD $cb>
+      <B>$text{'host_img_gd2'}</B>
+     </TD>
+     <TD $cb>
+      <INPUT TYPE=text NAME="imagegd" SIZE=30 VALUE="$cgihost->{'values'}->[3]">
+     </TD>
+
+     <TD $cb>
+      <B>$text{'host_alt_tag'}</B>
+     </TD>
+     <TD $cb>
+      <INPUT TYPE=text NAME="alttag" SIZE=30 VALUE="$cgihost->{'values'}->[4]">
+     </TD>
+    </TR>
+
+   </TABLE>
+  </TD>
+ </TR>
+</TABLE>
+<BR>
 
 EOM
 
@@ -268,6 +351,8 @@ if ($host) {
 
 print <<EOM;
 </FORM>
+
+<BR>
 
 <TABLE BORDER=2 CELLPADDING=0 CELLSPACING=0 WIDTH=100% $cb>
  <TR>

@@ -36,7 +36,6 @@ $cfile=&read_file_lines($config{'main_config'});
 
 
 if (!$in{'log'}) { &error(&text('sfiles_nofile', "log")) }
-if (!-e $in{'log'}) { &error(&text('sfiles_notfound', $in{'log'})) };
 $tmp=&find_name('log_file', \@conf);
 if ($tmp) {
  $cfile->[$tmp->{'line'}]=join('=', "log_file", $in{'log'});
@@ -46,7 +45,6 @@ if ($tmp) {
 
 
 if (!$in{'hostcfg'}) { &error(&text('sfiles_nofile'), "host configuration") }
-if (!-e $in{'hostcfg'}) { &error(&text('sfiles_notfound', $in{'hostcfg'})) };
 $tmp=&find_name('cfg_file', \@conf);
 if ($tmp) {
  $cfile->[$tmp->{'line'}]=join('=', "cfg_file", $in{'hostcfg'});
@@ -72,6 +70,13 @@ if ($tmp) {
  push(@{$cfile}, join('=', "temp_file", $in{'temp'}));
 }
 
+if (!$in{'comm'}) { &error(&text('sfiles_nofile'), "command") }
+$tmp=&find_name('command_file', \@conf);
+if ($tmp) {
+ $cfile->[$tmp->{'line'}]=join('=', "command_file", $in{'comm'});
+} else {
+ push(@{$cfile}, join('=', "command_file", $in{'comm'}));
+}
 
 &flush_file_lines();
 &redirect("edit_files.cgi");

@@ -19,10 +19,6 @@
 #    Created 21.12.1999
 
 
-#######################
-#    Configuration    #
-#######################
-
 require './netsaint-lib.pl';
 $access{'files'} || &error($text{'efiles_notallowed'});
 
@@ -37,6 +33,7 @@ $logselector=&file_chooser_button('log', 0, 0);
 $hostcfgselector=&file_chooser_button('hostcfg', 0, 0);
 $statusselector=&file_chooser_button('status', 0, 0);
 $tempselector=&file_chooser_button('temp', 0, 0);
+$commselector=&file_chooser_button('comm', 0, 0);
 
 $tmp=&find_name('log_file', \@conf);
 $logvalue=$tmp->{'values'}->[0];
@@ -50,6 +47,8 @@ $statusvalue=$tmp->{'values'}->[0];
 $tmp=&find_name('temp_file', \@conf);
 $tempvalue=$tmp->{'values'}->[0];
 
+$tmp=&find_name('command_file', \@conf);
+$commvalue=$tmp->{'values'}->[0];
 
 
 &header($text{'efiles_title'}, "", "files", 1, 0, undef,
@@ -102,6 +101,14 @@ print <<EOM;
      </TD>
      <TD $cb>
       <INPUT TYPE="text" NAME="temp" VALUE="$tempvalue" SIZE=35> $tempselector
+     </TD>
+    </TR>
+    <TR>
+     <TD $cb>
+      <B>$text{'efiles_comm'}</B>
+     </TD>
+     <TD $cb>
+      <INPUT TYPE="text" NAME="comm" VALUE="$commvalue" SIZE=35> $commselector
      </TD>
     </TR>
      

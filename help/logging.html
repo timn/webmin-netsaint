@@ -1,4 +1,4 @@
-<header>Introduction to NetSaint Configuration</header>
+<header>NetSaint Configuration</header>
 
 <H3>Logging Configuration</H3>
 
@@ -10,6 +10,8 @@
 <a href="#log_service_retries">Service check retry logging option</a><br>
 <a href="#log_host_retries">Host retry logging option</a><br>
 <a href="#log_event_handlers">Event handler logging option</a><br>
+<a href="#log_rotation_method">Log rotation method</a><br>
+<a href="#log_archive_path">Log archive path</a><br>
 </p>
 
 <hr>
@@ -267,6 +269,70 @@ is mostly useful when attempting to debug NetSaint or test out host <a href="eve
 <li>0 = Don't log host check retries
 <li>1 = Log host check retries
 </ul>
+</p>
+
+
+
+<p>
+<a name="log_rotation_method"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Log Rotation Method</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>log_rotation_method=&lt;n/h/d/w/m&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>log_rotation_method=d</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is the rotation method that you would like NetSaint to use for your log file.  Values are as follows:
+</p>
+<p>
+<ul>
+<li>n = None (don't rotate the log - this is the default)
+<li>h = Hourly (rotate the log at the top of each hour)
+<li>d = Daily (rotate the log at midnight each day)
+<li>w = Weekly (rotate the log at midnight on Saturday)
+<li>m = Monthly (rotate the log at midnight on the last day of the month)
+</ul>
+</p>
+
+
+<p>
+<a name="log_archive_path"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Log Archive Path</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td>Format:</td>
+<td><strong>log_archive_path=&lt;path&gt;</strong></td>
+</tr>
+<tr>
+<td>Example:</td>
+<td><font color="red"><strong>log_archive_path=/usr/local/netsaint/var/archives/</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is the directory where NetSaint should place log files that have been rotated.  This option is ignored if you choose to not use the log rotation functionality.
 </p>
 
 

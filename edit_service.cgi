@@ -204,7 +204,7 @@ print <<EOM;
      <TD $cb>
       <SELECT NAME="eventhandler">
 EOM
-print "      <OPTION VALUE=0";
+print "      <OPTION VALUE=\"\"";
  print ! $service->{'values'}->[11] ? " SELECTED" :"";
  print ">$text{'service_eventhandler_none'}\n";
 

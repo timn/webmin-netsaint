@@ -1,6 +1,12 @@
-<header>Introduction to NetSaint Configuration</header>
+<header>NetSaint Configuration</header>
 
 <H3>Host Configuration</H3>
+
+
+<p>
+<a href="#host">Main host configuration</a><br>
+<a href="#hostextinfo">Extended host information</a><br>
+</p>
 
 <p>
 <a name="host"></a>
@@ -137,5 +143,76 @@ handling events.  If you do not wish to define an event handler for the host, le
 </tr>
 </table>
 </p>
+
+
+<p>
+<a name="hostextinfo"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Extended Host Information</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>hostextinfo[&lt;host_name&gt;]=&lt;notes_url&gt;;&lt;icon_image&gt;;&lt;vrml_image&gt;;&lt;gd2_image&gt;;&lt;alt_tag&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>hostextinfo[router3]=/hostinfo/router3.html;cat5000.gif;cat5000.jpg;cat5000.gd2;Cisco Catalyst 5000</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+Extended host information entries are basically used to make the output from the <a href="cgis.html#status_cgi">status</a>, <a href="cgis.html#statusmap_cgi">statusmap</a>, <a href="cgis.html#statuswrl_cgi">statuswrl</a>, and <a href="cgis.html#extinfo_cgi">extinfo</a> CGIs look pretty.  They have no effect on monitoring and are completely optional.
+</p>
+
+<p>
+<table border="1">
+<tr>
+<td valign="top"><strong>&lt;host_name&gt;</strong></td>
+<td>
+This is a short name of the host, as defined in the <a href="confighost.html">host configuration file</a>.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;notes_url&gt;</strong></td>
+<td>
+This is an optional URL that can be used to provide more information about the host.  If you specify an URL, you will see a link that says "Notes About This Host" in the <a href="cgis.html#extinfo_cgi">extended information</a> CGI (when you are viewing information about the specified host).  Any valid URL can be used.  If you plan on using relative paths, the base path will the the same as what is used to access the CGIs (i.e. <i>/cgi-bin/netsaint/</i>).  This can be very useful if you want to make detailed information on the host, emergency contact methods, etc available to other support staff.
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;icon_image&gt;</strong></td>
+<td>
+The name of a GIF, PNG, or JPG image that should be associated with this host.  This image will be displayed in the <a href="cgis.html#status_cgi">status</a> and <a href="cgis.html#extinfo_cgi">extended information</a> CGIs.  The image will look best if it is 40x40 pixels in size.  Images for hosts are assumed to be in the <b>logos/</b> subdirectory in your HTML images directory (i.e. <i>/usr/local/netsaint/share/images/logos</i>).
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;vrml_image&gt;</strong></td>
+<td>
+The name of a GIF, PNG, or JPG image that should be associated with this host.  This image will be used as the texture map for the specified host in the <a href="cgis.html#statuswrl_cgi">statuswrl</a> CGI.  Unlike the image you use for the <i>&lt;icon_image&gt;</i> variable, this one should probably <i>not</i> have any transparency.  If it does, the host object will look a bit wierd.  Images for hosts are assumed to be in the <b>logos/</b> subdirectory in your HTML images directory (i.e. <i>/usr/local/netsaint/share/images/logos</i>).
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;gd2_image&gt;</strong></td>
+<td>
+The name of a GD2 format image that should be associated with this host.  This image will be used in the image created by the <a href="cgis.html#statusmap_cgi">statusmap</a> CGI.  GD2 images can be created from PNG images by using the <b>pngtogd2</b> utility supplied with Thomas Boutell's <a href="http://www.boutell.com/gd">gd library</a>.  The GD2 images should be created in <i>uncompressed</i> format in order to minimize CPU load when the statusmap CGI is generating the network map image.  The image will look best if it is 40x40 pixels in size.  You can leave these option blank if you are not using the statusmap CGI.  Images for hosts are assumed to be in the <b>logos/</b> subdirectory in your HTML images directory (i.e. <i>/usr/local/netsaint/share/images/logos</i>).
+<td>
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>&lt;alt_tag&gt;</strong></td>
+<td>
+An optional string that is used in the ALT tag of the image specified by the <i>&lt;icon_image&gt;</i> argument.  The ALT tag is used in both the <a href="cgis.html#status_cgi">status</a> and <a href="cgis.html#statusmap_cgi">statusmap</a> CGIs.
+</td>
+</tr>
+</table>
+</p>
+
+
 <hr>
 

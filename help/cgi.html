@@ -1,9 +1,15 @@
-<header>Introduction to NetSaint Configuration</header>
+<header>NetSaint Configuration</header>
 
 <H3>CGI Configuration</H3>
 
 <p>
 <a href="#main_cfg_file">Main configuration file location</a><br>
+<a href="#url_html_path">URL HTML path</a><br>
+<a href="#url_cgibin_path">URL CGI-BIN path</a><br>
+<a href="#process_check_command">Process check command</a><br>
+<a href="#suppress_alert_window">Alert window suppression</a><br>
+<a href="#refresh_rate">CGI refresh rate</a><br>
+<a href="#html_table_colors">Custom HTML table colors</a><br>
 </p>
 
 <hr>
@@ -32,6 +38,225 @@
 
 <p>
 This specifies the location of your <a href="configmain.html">main configuration file</a>.  The CGIs need to know where to find this file in order to get information about configuration information, current host and service status, etc.
+</p>
+
+
+
+<p>
+<a name="physical_html_path"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Physical HTML Path</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>physical_html_path=&lt;path&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>physical_html_path=/usr/local/netsaint/share</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is the <i>physical</i> path where the HTML files for NetSaint are kept on your workstation or server.  NetSaint
+assumes that the documentation and images files (used by the CGIs) are stored in subdirectories called <i>docs/</i> and <i>images/</i>, respectively.
+</p>
+
+
+<p>
+<a name="url_html_path"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>URL HTML Path</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>url_html_path=&lt;path&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>url_html_path=/netsaint</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+If, when accessing NetSaint via a web browser, you point to an URL like <b>http://www.myhost.com/netsaint</b>, this value
+should be <i>/netsaint</i>.  Basically, its the path portion of the URL that is used to access the NetSaint HTML pages.
+</p>
+
+
+<p>
+<a name="url_cgibin_path"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>URL CGI-BIN Path</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>url_cgibin_path=&lt;path&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>url_cgibin_path=/cgi-bin/netsaint</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+If, when accessing NetSaint's CGI programs via a web browser, you point to an URL like 
+<b>http://www.myhost.com/cgi-bin/netsaint</b>, this value should be <i>/cgi-bin/netsaint</i>.  
+Basically, its the path portion of the URL that is used to access the NetSaint CGI-BIN programs.
+</p>
+
+
+<p>
+<a name="process_check_command"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Process Check Command</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>process_check_command=&lt;command_line&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>process_check_command=/usr/local/netsaint/libexec/check_netsaint /usr/local/netsaint/var/status.log 5 '/usr/local/netsaint/bin/netsaint -d /usr/local/netsaint/etc/netsaint.cfg'</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This is the command that the CGIs should use to check the status of the NetSaint process.  This provides the CGIs (as well as yourself) with some idea of whether or not NetSaint is still running.  If the CGIs cannot determine whether or not NetSaint is running on the local machine, some features like external commands in the <a href="cgis.html#extinfo_cgi">extended information</a> and <a href="cgis.html#cmd_cgi">command</a> CGIs may not be available.  The process check command that you specify should follow the same <a href="pluginhowto.html">guidelines</a> that are required of the plugins.
+</p>
+<p>
+<strong>Notes:</strong>
+</p>
+<p>
+<ul>
+<li>The <a href="plugins.html#check_netsaint">check_netsaint</a> plugin is ideal for the purpose of checking both the status of the NetSaint process and the "freshness" of the data in the status log.  I would highly recommend using it in this situation.
+<li>If you are running a chroot'ed web server, you will have to place the plugin (or whatever you're using) in the <b>sbin/</b> subdirectory of your NetSaint installation.
+</ul>
+</p>
+
+
+<p>
+<a name="suppress_alert_window"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Alert Window Suppression</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>suppress_alert_window=&lt;0/1&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>suppress_alert_window=1</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This option allows you to specify whether or not you want to permanently suppress the host alert window in the <a href="cgis.html#status_cgi">status CGI</a>.  Normally the alert window will be displayed if one or more hosts is down or unreachable.
+</p>
+<p>
+<ul>
+<li>0 = Don't suppress alert window, allow it to be displayed (default)
+<li>1 = Don't display alert window at any time
+</ul>
+</p>
+
+
+<p>
+<a name="refresh_rate"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>CGI Refresh Rate</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Format:</td>
+<td><strong>refresh_rate=&lt;rate_in_seconds&gt;</strong></td>
+</tr>
+<tr>
+<td valign=top>Example:</td>
+<td><font color="red"><strong>refresh_rate=90</strong></font></td>
+</tr>
+</table>
+</p>
+
+<p>
+This option allows you to specify the number of seconds between page refreshes for the <a href="cgis.html#status_cgi">status</a>, <a href="cgis.html#statusmap_cgi">statusmap</a>, and <a href="cgis.html#extinfo_cgi">extinfo</a> CGIs.
+</p>
+
+
+<p>
+<a name="html_table_colors"></a>
+<table border="0" width="100%">
+<tr>
+<td bgcolor="#cbcbcb"><strong>Custom HTML Table Colors</strong></td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="0">
+<tr>
+<td valign=top>Formats:</td>
+<td>
+<strong>html_table_fg_color=&lt;HTML_color&gt;</strong><br>
+<strong>html_table_bg_color=&lt;HTML_color&gt;</strong><br>
+<strong>html_table_bg_odd_color=&lt;HTML_color&gt;</strong><br>
+<strong>html_table_bg_even_color=&lt;HTML_color&gt;</strong><br>
+</td>
+</tr>
+<tr>
+<td valign=top>Examples:</td>
+<td>
+<font color="red"><strong>html_table_fg_color=#DCE5C1</strong></font><br>
+<font color="red"><strong>html_table_bg_color=#7172A2</strong></font><br>
+<font color="red"><strong>html_table_bg_odd_color=#E1E2ED</strong></font><br>
+<font color="red"><strong>html_table_bg_even_color=#EEEEF4</strong></font><br>
+</td>
+</tr>
+</table>
+</p>
+
+<p>
+These options allow you to override the default colors used in the HTML tables produced by the CGIs.  The &lt;<i>html_table_bg_color</i>&gt; and &lt;<i>html_table_bg_color</i>&gt; options are used to control the background and foreground colors used in the table headers.  The &lt;<i>html_table_bg_odd_color</i>&gt; and &lt;<i>html_table_bg_even_color</i>&gt; options are used to specify alternating background colors used in table rows that contain data.  These options are completely option.  If you do not define any colors to be used in the tables, the default program colors will be used.
 </p>
 
 <hr>

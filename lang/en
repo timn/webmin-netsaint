@@ -3,18 +3,22 @@ index_error=Failed to load NetSaint Configuration module
 index_merr=Main Configuration file '$1' not found. Check <A HREF=$2>module configuration</A>.
 index_herr=Hosts Configuration file '$1' not found. Check <A HREF=$2>module configuration</A>.
 index_cerr=Configuration file '$1' not found. Check <A HREF=$2>module configuration</A>.
+index_icon_auth=CGI Authentication
+index_icon_output=<B>View NetSaint Output</B>
 
 seconds=seconds
+timeunits=time units
 name=Name
 
 efiles_title=Files
 efiles_notallowed=You are not allowed to edit the file settings
 efiles_error=Failed to open files page
 efiles_header=File Options
-efiles_log=Full p ath to log file
+efiles_log=Full path to log file
 efiles_hostcfg=Full path to host configuration file (same as in module configuration!)
 efiles_status=Full path to status file
 efiles_temp=Full path to temp file
+efiles_comm=Full path to external command file
 efiles_return=NetSaint configuration
 
 ntfcs_title=Notifications
@@ -30,12 +34,20 @@ log_title=Logging
 log_notallowed=You are not allowed to edit the logging settings
 log_header=Logging Options
 log_error=Failed to open logging page
+log_level=Log Level
 log_use_syslog=Use Syslog facility?
 log_syslog_level=Syslog Level
 log_notifications=Log Notifications?
 log_service_retries=Log service check retries?
 log_host_retries=Log host check retries?
 log_event_handler=Log host and service event handlers?
+log_rotate=Rotate logs
+log_rotate_n=No Rotation
+log_rotate_h=Hourly
+log_rotate_d=Daily
+log_rotate_w=Weekly
+log_rotate_m=Monthly
+log_rotate_archive=Archive directory for logs
 log_return=NetSaint configuration
 
 misc_title=Miscellaneous
@@ -45,24 +57,57 @@ misc_error=Failed to open miscellanous options page
 misc_sleep_time=Time to sleep between service checks
 misc_interval_length=Timing interval length
 misc_aggressive=Aggressive Host Checking?
+misc_mode=Program mode
+misc_mode_active=Active
+misc_mode_standby=Standby
+misc_eventh=Eventhandler Settings
+misc_globeh_host=Global Host Eventhandler
+misc_globeh_serv=Global Service Eventhandler
+misc_chkbehav=Checking Behavior
+misc_intchk_smart=Smart
+misc_intchk_no=No Delay
+misc_intchk_dumb=Dumb Delay (1 sec)
+misc_intchk_delmeth=Method to use to determine time between checks
+misc_serv_intleav_factor=Service check interleave factor
+misc_servintleav_smart=Smart
+misc_servintleav_usrdef=User defined
+misc_max_conc_checks=Maximum concurrent checks
+misc_serv_reap_freq=Service reaper frequency
 misc_return=NetSaint configuration
-
-html_title=HTML Options
-html_notallowed=You are not allowed to edit the HTML settings
-html_header=HTML Options
-html_error=Failed to open HTML options page
-html_autohtml=Generate static pages automatically?
-html_physical_html_path=Physical (local) path to html dir
-html_url_html_path=URL to HTML path
-html_url_cgibin_path=URL to CGI-BIN
-html_return=NetSaint configuration
 
 cgi_title=CGI Options
 cgi_notallowed=You are not allowed to edit the CGI settings
 cgi_header=CGI Options
 cgi_error=Failed to open CGI Options page
 cgi_main_config_file=Full path to main configuration file
+cgi_physical_html_path=Physical (local) path to html dir
+cgi_url_html_path=URL to HTML path
+cgi_url_cgibin_path=URL to CGI-BIN
+cgi_process_check_command=Process Check Command
+cgi_suppress_alert_window=Suppress alert window
+cgi_refresh_rate=Refreshrate
+cgi_norefresh=(Enter nothing for no refresh)
+cgi_table_fg_color=Custom HTML foreground color
+cgi_table_bg_color=Custom HTML background color
+cgi_table_bg_odd_color=Custom HTML background color for odd lines
+cgi_table_bg_even_color=Custom HTML background color for even lines
 cgi_return=NetSaint configuration
+
+auth_title=CGI Authentication
+auth_notallowed=You are not allowed to edit the CGI authentication settings
+auth_header=CGI Authentication Options
+auth_error=Failed to open CGI authentication options page
+auth_use=Use Authentication?
+auth_default_user=Default User (be careful, read the help!)
+auth_access=Users with access to...
+auth_users_sysinfo=System Information
+auth_users_syscomm=System Commands
+auth_users_confinf=Configuration Info
+auth_users_hosts=All Hosts
+auth_users_hostcomm=All Host Commands
+auth_users_serv=All Services
+auth_users_servcomm=All Service Commands
+auth_return=NetSaint configuration
 
 hosts_title=Hosts
 hosts_error=Failed to open hosts page
@@ -93,10 +138,17 @@ host_eventhandler=Event handler
 host_eventhandler_none=None
 host_none=None
 host_groups=Host is member of hostgroup(s)
+host_extinfo=Extended Host Information (optional)
+host_use_cgiextinfo=Use extended host info?
+host_notes_url=URL for further info
+host_img_icon=Icon
+host_img_vrml=VRML grahpic
+host_img_gd2=GD2 graphic
+host_alt_tag=Alt tag
 host_delete=Delete Host
 host_create=Create Host
 host_notfound=Host '$1' not found in host configuration file
-host_services=Services
+host_services=Services for this host
 host_no_services=No services found!
 host_new_service=Define a new service
 host_return=hosts
@@ -168,6 +220,32 @@ command_delete=Delete Command
 command_create=Create Command
 command_return=commands
 
+extcommands_title=External Commands
+extcommands_error=Failed to open external commands page
+extcommands_header=External Commands
+extcommands_new=Push new external command
+extcommands_err_nofound=No external commands found!
+extcommands_config=Configure external command options
+extcommands_return=NetSaint configuration
+
+extcommand_title_edit=Edit External Command
+extcommand_title_create=Create External Command
+extcommand_error=Failed to open external command page
+extcommand_header=Edit external command $1
+extcommand_command=External Command
+extcommand_arguments=Arguments
+extcommand_delete=Delete External Command
+extcommand_create=Create External Command
+extcommand_return=external commands
+
+extcommopt_title=External Command Options
+extcommopt_notallowed=You are not allowed to edit the options of external commands
+extcommopt_error=Failed to open external command options page
+extcommopt_header=Edit external command options
+extcommopt_check=Check for external commands?
+extcommopt_interval=Check interval:
+extcommopt_return=external commands
+
 service_title_edit=Edit Service
 service_title_create=Create Service
 service_error=Failed to open service page
@@ -229,13 +307,25 @@ sfiles_notfound=File '$1' could not be found
 
 slogging_error=Failed to save logging options
 slogging_invalid=Invalid value '$1' for $2 (must be $3)
+slogging_err_inv_logrotate=Log rotation method
+slogging_err_inv_logrotate2=n, h, d, w or m
+slogging_err_logrotarch=log rotation archive path
+slogging_err_logrotarch2=a directory
 
 smisc_error=Failed to save miscellaneous options
 smisc_invalid=Invalid or missing value $1 for $2 (must be $3)
-
-shtml_error=Failed to save HTML options
-shtml_invalid=Invalid value $1 for $2 (must be $3)
-shtml_inv_dir=Directory '$1' (for setting $2) is missing or does not exist
+smisc_err_inv_scilf=service interleave factor
+smisc_err_inv_scilf2=a number
+smisc_err_inv_icdm=inter check delay method
+smisc_err_inv_icdm2=n, d or s
+smisc_err_inv_maxconcchk=maximum concurrent checks
+smisc_err_inv_maxconcchk2=a number
+smisc_err_inv_servreapfreq=service reaper frequency
+smisc_err_inv_servreapfreq2=a number
+smisc_err_progmode=program mode
+smisc_err_progmode=a or s
+smisc_err_globserveh=Command defined as global service eventhandler notfound
+smisc_err_globhosteh=Command defined as global host eventhandler notfound
 
 sntfcs_error=Failed to save notification options
 sntfcs_missing=Missing value for $1
@@ -246,7 +336,7 @@ shost_noalias=No alias given. You should give an alias for this host
 shost_noaddress=No address given. You must give an IP or FQDN
 shost_nogroup=No group given for host. You must give at least one group
 shost_maxattempts_err=Missing or invalid value for max attempts
-shtml_invalid=Invalid value $1 for $2 (must be $3)
+shost_invalid=Invalid value $1 for $2 (must be $3)
 shost_interval_err=Missing or invalid value for notification interval
 shost_notperiod_err=You entered a notification period which does not exist
 shost_checkcommand_err=You entered a check command which does not exist
@@ -270,9 +360,35 @@ scontact_error=Failed to save contact
 scontact_missing=The value for $1 is missing
 scontact_invalid=The value $1 for $2 is invalid (must be 0 or 1)
 scontact_notfound=The contact $1 could not been found
-_notallowed_edit=You are not allowed to edit
-_notallowed_create=You are not allowed to create
-_notallowed_delete=You are not allowed to delete
+
+
+scgi_error=Failed to save CGI options
+scgi_inv_dir=Directory '$1' (for setting $2) is missing or does not exist
+scgi_invalid=The value $1 for $2 is invalid (must $3)
+scgi_nomainfile=No file given for main configuration file
+scgi_0or1=0 or 1
+scgi_suppalwin=suppressig alert window
+scgi_number=number
+scgi_table_fg_color=table foreground color
+scgi_table_bg_color=table background color
+scgi_hexcolor=hexadezimal color
+scgi_table_bg_odd_color=odd line background color
+scgi_table_bg_even_color=even line background color
+
+
+sauth_error=Failed to save CGI authentication options
+sauth_invalid=The value $1 for $2 is invalid (must be $3)
+sauth_1or0=1 or 0
+sauth_useauth=authentication usage
+sauth_defaultuser=default user
+sauth_invalid2=Missing value for $1
+sauth_sysinfo=system information access
+sauth_confinf=configuration information access
+sauth_syscom=system/process command access
+sauth_hosts=host access
+sauth_hostcomm=host command access
+sauth_serv=service access
+sauth_servcomm=service commands
 
 scontactgroup_error=Failed to save contactgroup
 scontactgroup_already_exists=A contactgroup named '$1' already exists. Choose another name
@@ -289,6 +405,20 @@ scommand_already_exists=A command named '$1' already exists. Choose another name
 scommand_notallowed_edit=You are not allowed to edit commands
 scommand_notallowed_create=You are not allowed to create commands
 scommand_notallowed_delete=You are not allowed to delete commands
+
+sextcomm_error=Failed to save external command
+sextcomm_notallowed_delete=You are not allowed to delete external commands
+sextcomm_notallowed_edit=You are not allowed to edit external commands
+sextcomm_notallowed_create=You are not allowed to create external commands
+sextcomm_notfound=Sorry, command not found ($1)
+
+sextcommopt_error=Failed to save external command options
+sextcommopt_invalid=The value $1 for $2 is invalid (must be $3)
+sextcommopt_interval=check interval
+sextcommopt_integer=integer
+sextcommopt_check=check external commands
+sextcommopt_1or0=1 or 0
+
 
 stimeperiod_error=Failed to save time period
 stimeperiod_missing=You must give a timeperiod alias
@@ -335,3 +465,6 @@ acl_timeperiod_delete=Can delete timeperiods
 acl_service_edit=Can edit services
 acl_service_create=Can create services
 acl_service_delete=Can delete services
+acl_extcomm_edit=Can edit external commands
+acl_extcomm_create=Can create external commands
+acl_extcomm_delete=Can delete external commands

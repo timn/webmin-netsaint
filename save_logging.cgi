@@ -19,10 +19,6 @@
 #    Created 09.01.2000
 
 
-#######################
-#    Configuration    #
-#######################
-
 require './netsaint-lib.pl';
 $access{'logging'} || &error($text{'log_notallowed'});
 
@@ -33,6 +29,15 @@ $whatfailed=$text{'slogging_error'};
 
 @conf=&parse_config($config{'main_config'});
 $cfile=&read_file_lines($config{'main_config'});
+
+
+if ($in{'loglevel'} !~ /^[12]$/) { &error(&text('slogging_invalid', $in{'loglevel'}, 'Log Level', '1 or 2')) }
+$tmp=&find_name('log_level', \@conf);
+if ($tmp) {
+ $cfile->[$tmp->{'line'}]=join('=', "log_level", $in{'loglevel'});
+} else {
+ push(@{$cfile}, join('=', "log_level", $in{'loglevel'}));
+}
 
 
 if ($in{'usesyslog'} !~ /^[01]$/) { &error(&text('slogging_invalid', $in{'usesyslog'}, 'Syslog Facility', '0 or 1')) }
@@ -93,6 +98,28 @@ if ($tmp) {
  $cfile->[$tmp->{'line'}]=join('=', "log_event_handlers", $in{'eventhandler'});
 } else {
  push(@{$cfile}, join('=', "log_event_handlers", $in{'event_handler'}));
+}
+
+
+if ($in{'logrotate'} !~ /^[nhdwm]$/) {
+ &error(&text('slogging_invalid', $in{'logrotate'}, $text{'slogging_err_inv_logrotate'}, $text{'slogging_err_inv_logrotate2'}))
+}
+$tmp=&find_name('log_rotation_method', \@conf);
+if ($tmp) {
+ $cfile->[$tmp->{'line'}]=join('=', "log_rotation_method", $in{'logrotate'});
+} else {
+ push(@{$cfile}, join('=', "log_rotation_method", $in{'logrotate'}));
+}
+
+
+if (!$in{'logrotarch'}) {
+ &error(&text('slogging_invalid', $in{'logrotarch'}, $text{'slogging_err_logrotarch'}, $text{'slogging_err_logrotarch2'}))
+}
+$tmp=&find_name('log_archive_path', \@conf);
+if ($tmp) {
+ $cfile->[$tmp->{'line'}]=join('=', "log_archive_path", $in{'logrotarch'});
+} else {
+ push(@{$cfile}, join('=', "log_archive_path", $in{'logrotarch'}));
 }
 
 

@@ -115,6 +115,19 @@ print "<TR><TD><B>$text{'acl_service_delete'}</B></TD>";
 print "<TD><INPUT TYPE=radio NAME=\"servicedelete\" VALUE=\"1\"", ($_[0]->{'servicedelete'}) ? " CHECKED" : "", "> $text{'yes'} ";
 print "<INPUT TYPE=radio NAME=\"servicedelete\" VALUE=\"0\"", ($_[0]->{'servicedelete'}) ? "" : " CHECKED", "> $text{'no'}</TD><TR>\n";
 
+
+print "<TR><TD><B>$text{'acl_extcomm_edit'}</B></TD>";
+print "<TD><INPUT TYPE=radio NAME=\"extcommedit\" VALUE=\"1\"", ($_[0]->{'extcommedit'}) ? " CHECKED" : "", "> $text{'yes'} ";
+print "<INPUT TYPE=radio NAME=\"extcommedit\" VALUE=\"0\"", ($_[0]->{'extcommedit'}) ? "" : " CHECKED", "> $text{'no'}</TD><TR>\n";
+
+print "<TR><TD><B>$text{'acl_extcomm_create'}</B></TD>";
+print "<TD><INPUT TYPE=radio NAME=\"extcommcreate\" VALUE=\"1\"", ($_[0]->{'extcommcreate'}) ? " CHECKED" : "", "> $text{'yes'} ";
+print "<INPUT TYPE=radio NAME=\"extcommcreate\" VALUE=\"0\"", ($_[0]->{'extcommcreate'}) ? "" : " CHECKED", "> $text{'no'}</TD><TR>\n";
+
+print "<TR><TD><B>$text{'acl_extcomm_delete'}</B></TD>";
+print "<TD><INPUT TYPE=radio NAME=\"extcommdelete\" VALUE=\"1\"", ($_[0]->{'extcommdelete'}) ? " CHECKED" : "", "> $text{'yes'} ";
+print "<INPUT TYPE=radio NAME=\"extcommdelete\" VALUE=\"0\"", ($_[0]->{'extcommdelete'}) ? "" : " CHECKED", "> $text{'no'}</TD><TR>\n";
+
 }
 
 # acl_security_save(&options)
@@ -156,6 +169,10 @@ sub acl_security_save
  $_[0]->{'serviceedit'} = $in{'serviceedit'};
  $_[0]->{'servicecreate'} = $in{'servicecreate'};
  $_[0]->{'servicedelete'} = $in{'servicedelete'};
+
+ $_[0]->{'extcommedit'} = $in{'extcommedit'};
+ $_[0]->{'extcommcreate'} = $in{'extcommcreate'};
+ $_[0]->{'extcommdelete'} = $in{'extcommdelete'};
 
 }
 
